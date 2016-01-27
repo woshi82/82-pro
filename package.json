@@ -1,0 +1,32 @@
+{
+  "name": "82-pro",
+  "version": "0.0.1",
+  "description": "car Activity 82-pro",
+  "main": "server/app.js",
+  "private": true,
+  "scripts": {
+    "watch": "fis3 server clean; fis3 release -cwL",
+    "start": "fis3 server start",
+    "release": "fis3 release -cpd ../",
+    "ci": "npm i; npm i bower; node_modules/bower/bin/bower install; fis3 release -compd ../"
+  },
+  "keywords": [
+    "activity",
+    "82-pro"
+  ],
+  "author": {
+    "name": "woshi82",
+    "email": "939184663@qq.com"
+  },
+  
+  "car": {
+    "git": "github.com"
+  },
+  
+  "dependencies": {},
+  "devDependencies": {
+    "express": "^4.13.3",
+    "body-parser": "^1.14.1",
+    "path": "^0.12.7"
+  }
+}
