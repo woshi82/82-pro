@@ -1,0 +1,419 @@
+
+/*public*/
+@font-face {
+    font-family: 'hw';
+    src: url('../font/axurehandwriting_1-webfont.eot'); /* IE9*/
+    src: url('../font/axurehandwriting_1-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../font/axurehandwriting_1-webfont.woff') format('woff'), /* chrome、firefox */
+    url('../font/axurehandwriting_1-webfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('../font/axurehandwriting_1-webfont.svg#axurehandwriting_1-webfont') format('svg'); /* iOS 4.1- */
+}
+.clearfix{
+	zoom: 1;
+}
+.clearfix:after {
+	display: block;
+	clear: both;
+	content: '';
+}
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+/*end public*/
+.nav_w {
+	width: 100%;
+	background: #fff;
+	text-align: center;
+	height: 50px;
+	z-index: 10;
+    position: fixed;
+    box-shadow: 0 2px 5px 0px #EFEFEF;
+}
+.navbar {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	margin: 0 auto;
+
+}
+.navbar>a {
+	float: left;
+	color: #45d4bc;
+	text-align: center;
+    line-height: 50px;
+    font-size: 25px;
+    font-family: 'hw';
+    padding: 0 30px;
+    font-weight: bold;
+}
+.navbar>a:nth-of-type(2) {
+	backgroun d-color: #f00000;
+}
+.page0,#work,.page2,.page3 {
+	width: 100%;
+	
+}
+
+
+
+.page2 {
+	height: 600px;
+	background: #2cd4bb;
+}
+.page3 {
+	height: 600px;
+	background: #8CCCF3;
+}
+.home_top {
+	width: 100%;
+	height: 600px;
+	background: url(../images/home_bg.png) no-repeat;
+	background-size: 100% 600px;
+}
+
+/*work*/
+#work {
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	padding-top: 100px;
+	position: absolute;
+	-webkit-box-sizing: border-box; 
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;  
+}
+.waterfall {
+	position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    z-index: 1;
+    padding-top: 1px;
+    color: #241f21;
+    margin: 0 auto;
+}
+.waterfall .waterfall_wrap {
+	width: 20%;	 
+    -webkit-transition: all 0.25s ease-in-out;
+    -webkit-transition-delay: 0s;
+    -moz-transition: all 0.25s ease-in-out 0s;
+    -o-transition: all 0.25s ease-in-out 0s;
+    transition: all 0.25s ease-in-out 0s;
+    cursor: pointer;
+    display: block;
+    background: #fff;
+    min-width: 256px;
+    height: auto;
+    position: absolute;
+    text-decoration: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-left: -1px;
+    
+}
+.waterfall_wrap_b {
+	padding: 20px;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #eee;
+    border-top: 0px;
+    position: relative;
+}
+.waterfall .waterfall_wrap.hasImg .waterfall_wrap_b img{
+	max-width: 100%;
+	height: auto;
+}
+@media screen and (max-width: 1280px){
+	.waterfall .waterfall_wrap{
+		width: 25%;
+	}
+}
+@media screen and (max-width: 1028px){
+	.waterfall .waterfall_wrap{
+		width: 33.33%;
+	}
+}
+@media screen and (max-width: 768px){
+	.waterfall .waterfall_wrap{
+		width: 50%;
+	}
+}
+@media screen and (max-width: 480px){
+	.waterfall .waterfall_wrap{
+		width: 100%;
+	}
+}
+.waterfall .waterfall_wrap .waterfall_wrap_b h3.title{
+	color: #241f21;
+    font-family: "latolight",Arial,Helvetica,sans;
+    font-size: 2em;
+    text-transform: none;
+    font-weight: normal;
+    letter-spacing: 0;
+    text-align: center;
+    margin: 10px 0;
+    -webkit-transition: all 0.25s ease-in-out;
+    -webkit-transition-delay: 0s;
+    -moz-transition: all 0.25s ease-in-out 0s;
+    -o-transition: all 0.25s ease-in-out 0s;
+    transition: all 0.25s ease-in-out 0s;
+}
+.waterfall .waterfall_wrap.hasImg .waterfall_wrap_b h3.title {
+    font-size: 1.25em;
+    margin: 20px 0;
+	font-family: "latoregular",Arial,Helvetica,sans;
+}
+.waterfall .waterfall_wrap .waterfall_wrap_b p {
+	text-align: center;
+	font-family: 'latoregular', Arial, Helvetica, sans;
+    font-size: 0.750em;
+    color: #666;
+    text-align: center;
+}
+#modal-overlay{
+	position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+    background: rgba(35,35,35,0.85);
+    z-index: 0;
+    overflow: hidden;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transition: all 0.25s ease-in-out;
+    -webkit-transition-delay: 0.4s;
+    -moz-transition: all 0.25s ease-in-out 0.4s;
+    -o-transition: all 0.25s ease-in-out 0.4s;
+    transition: all 0.25s ease-in-out 0.4s;
+}
+#modal-overlay.open {
+    visibility: visible;
+    z-index: 8;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+    opacity: 1;
+    -webkit-transition: all 0.25s ease-in-out;
+    -webkit-transition-delay: 0s;
+    -moz-transition: all 0.25s ease-in-out 0s;
+    -o-transition: all 0.25s ease-in-out 0s;
+    transition: all 0.25s ease-in-out 0s;
+}
+#modal-overlay .angle-cover {
+    display: block;
+    position: absolute;
+    width: 106%;
+    left: -3%;
+    height: 0;
+    z-index: 0;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: all 0.4s ease-in-out;
+    -webkit-transition-delay: 0s;
+    -moz-transition: all 0.4s ease-in-out 0s;
+    -o-transition: all 0.4s ease-in-out 0s;
+    transition: all 0.4s ease-in-out 0s;
+    background-color: #fff;
+}
+#modal-overlay .angle-cover.before {
+    top: 50%;
+}
+#modal-overlay .angle-cover.after {
+    bottom: 50%;
+}
+#modal-overlay.open .angle-cover {
+    height: 16%;
+    padding: 1px;
+    -webkit-transition: all 0.4s ease-in-out;
+    -webkit-transition-delay: 0.25s;
+    -moz-transition: all 0.4s ease-in-out 0.25s;
+    -o-transition: all 0.4s ease-in-out 0.25s;
+    transition: all 0.4s ease-in-out 0.25s;
+}
+#modal-overlay.open .angle-cover.before {
+    top: 11.25%;
+    -webkit-transform: rotate(2.15deg);
+    -moz-transform: rotate(2.15deg);
+    -ms-transform: rotate(2.15deg);
+    -o-transform: rotate(2.15deg);
+    transform: rotate(2.15deg); 
+}
+#modal-overlay.open .angle-cover.after {
+    bottom: 11.25%;
+    -webkit-transform: rotate(-2.15deg);
+    -moz-transform: rotate(-2.15deg);
+    -ms-transform: rotate(-2.15deg);
+    -o-transform: rotate(-2.15deg);
+    transform: rotate(-2.15deg);
+}
+#modal-overlay #modal-content {
+    width: 100%;
+    height: 0px;
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    left: 0;
+    background: #fff;
+    padding: 0;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.4s ease-in-out;
+    -webkit-transition-delay: 0s;
+    -moz-transition: all 0.4s ease-in-out 0s;
+    -o-transition: all 0.4s ease-in-out 0s;
+    transition: all 0.4s ease-in-out 0s;
+}
+#modal-overlay.open #modal-content {
+    height: 68%;
+    top: 16%;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    -webkit-transition: all 0.4s ease-in-out;
+    -webkit-transition-delay: 0.25s;
+    -moz-transition: all 0.4s ease-in-out 0.25s;
+    -o-transition: all 0.4s ease-in-out 0.25s;
+    transition: all 0.4s ease-in-out 0.25s;
+}
+#modal-overlay #modal-content .close-modal {
+    position: absolute;
+    display: block;
+    width: 21px;
+    height: 21px;
+    background: url(../images/icn_close_btn.png) center center no-repeat;
+    background-size: 21px 21px;
+    top: 36px;
+    right: 39px;
+    z-index: 10;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transition: all 0.25s ease-in-out;
+    -webkit-transition-delay: 0s;
+    -moz-transition: all 0.25s ease-in-out 0s;
+    -o-transition: all 0.25s ease-in-out 0s;
+    transition: all 0.25s ease-in-out 0s;
+}
+
+#modal-overlay.open #modal-content .close-modal {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+    opacity: 0.5;
+}
+#modal-overlay.open #modal-content .close-modal:hover {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+    opacity: 1;
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+}
+#modal-overlay #modal-content .single-contribution-wrapper, #modal-overlay #modal-content .contribute-form-wrapper {
+    width: 100%;
+    height: 0;
+    position: relative;
+    z-index: 5;
+    overflow: hidden;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.4s ease-in-out;
+    -webkit-transition-delay: 0s;
+    -moz-transition: all 0.4s ease-in-out 0s;
+    -o-transition: all 0.4s ease-in-out 0s;
+    transition: all 0.4s ease-in-out 0s;
+}
+#modal-overlay #modal-content .single-contribution-wrapper {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+#modal-overlay.open #modal-content .single-contribution-wrapper, #modal-overlay.open #modal-content .contribute-form-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+    opacity: 1;
+    -webkit-transition: all 0.4s ease-in-out;
+    -webkit-transition-delay: 0.25s;
+    -moz-transition: all 0.4s ease-in-out 0.25s;
+    -o-transition: all 0.4s ease-in-out 0.25s;
+    transition: all 0.4s ease-in-out 0.25s;
+}
+
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-image, #modal-overlay #modal-content .single-contribution-wrapper .contribution-text {
+    display: block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+    float: left;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transition: all 0.4s ease-in-out;
+    -webkit-transition-delay: 0s;
+    -moz-transition: all 0.4s ease-in-out 0s;
+    -o-transition: all 0.4s ease-in-out 0s;
+    transition: all 0.4s ease-in-out 0s;
+}
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-text {
+    width: 40%;
+    margin: auto;
+    padding: 0 2.5%;
+}
+#modal-overlay.open #modal-content .single-contribution-wrapper .contribution-image, #modal-overlay.open #modal-content .single-contribution-wrapper .contribution-text, #modal-overlay.open #modal-content .single-contribution-wrapper .share-contribution, #modal-overlay.open #modal-content .contribute-form-wrapper .contribution-image, #modal-overlay.open #modal-content .contribute-form-wrapper .contribution-text, #modal-overlay.open #modal-content .contribute-form-wrapper .share-contribution {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+    opacity: 1;
+}
+.content .single-contribution-wrapper .contribution-text .wrapper {
+    text-align: center;
+}
+
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-text h2, #modal-overlay #modal-content .single-contribution-wrapper .contribution-text h3, #modal-overlay #modal-content .single-contribution-wrapper .contribution-text span {
+    letter-spacing: 0;
+    text-transform: none;
+    text-decoration: none;
+    font-weight: normal;
+    line-height: 1;
+}
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-text .contribution_fill, #modal-overlay #modal-content .single-contribution-wrapper .contribution-text h3 {
+    margin-bottom: 20px;
+}
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-text h3 {
+    font-family: "latoregular",Arial,Helvetica,sans;
+    font-size: 1.125em;
+}
+#modal-overlay #modal-content .single-contribution-wrapper[data-intent="influence"] .contribution-text h2, #modal-overlay #modal-content .single-contribution-wrapper[data-intent="influence"] .contribution-text h3 {
+    color: #dabe5c;
+}
