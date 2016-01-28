@@ -53,9 +53,8 @@ body {
 }
 .navbar>a {
 	float: left;
-	color: #45d4bc;
 	text-align: center;
-    font-size: 20px;
+    font-size: 30px;
     font-family: 'hw';
     padding: 0px 50px;
     font-weight: bold;
@@ -66,15 +65,36 @@ body {
     height: 40px;
     background: url(../images/my.png) no-repeat;
     background-size: 40px auto;
+    /*display: none;*/
+    transform: scale(0);
+    transition: .3s;
+}
+.navbar>a.active span:nth-of-type(1){
+    /*display: block;*/
+    transform: scale(1);
+
+
 }
 .navbar>a span:nth-of-type(2){
-    line-height: 10px;
+    transform: translateY(-48px) scale(1);
+    line-height: 54px;
     display: block;
+    color: #45d4bc;
+    transition: .3s;   
+}
+.navbar>a.active span:nth-of-type(2){
+    transform: translateY(-30px) scale(.8);
+}
+.navbar>a.green span:nth-of-type(2){
+    color: #45d4bc;
+}
+.navbar>a.pink span:nth-of-type(2){
+    color: #f8c9c5;
+}
+.navbar>a.purple span:nth-of-type(2){
+    color: #a392da;
 }
 
-.navbar>a:nth-of-type(2) {
-	backgroun d-color: #f00000;
-}
 /*end 导航*/
 
 

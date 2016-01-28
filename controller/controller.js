@@ -1,6 +1,22 @@
 
 
 var homeModule = angular.module("HomeModule", []);
+homeModule.directive('navbar',['$timeout', '$rootScope',function($timeout,$rootScope) {
+    return {
+        restrict: 'AE',
+        // replace: true,
+        transclude: true,
+        link: function(scope, element, attrs) {
+            element.on('click','a',function(){
+                var color = $(this).attr('color');
+                $(this).attr('class','active '+color).siblings().attr('class',color);
+            })
+        }
+
+
+    }
+
+}])
 homeModule.directive('canvaswave',['$timeout', '$rootScope',function($timeout,$rootScope) {
     return {
         restrict: 'AE',
