@@ -1,5 +1,8 @@
 
 /*public*/
+body {
+    min-width: 1200px;
+}
 @font-face {
     font-family: 'hw';
     src: url('../font/axurehandwriting_1-webfont.eot'); /* IE9*/
@@ -23,36 +26,58 @@
 	float: right;
 }
 /*end public*/
+/*导航*/
 .nav_w {
 	width: 100%;
 	background: #fff;
 	text-align: center;
-	height: 50px;
+	height: 86px;
 	z-index: 10;
     position: fixed;
     box-shadow: 0 2px 5px 0px #EFEFEF;
+    position: relative;
+}
+.logo {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    left: 100px;
+    background: #fff url(../images/logo.png) no-repeat center;
+    background-size: 80px auto;
 }
 .navbar {
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	-webkit-transform: translateX(-50%);
+    display: inline-block;
 	margin: 0 auto;
-
+    padding-top: 10px;
 }
 .navbar>a {
 	float: left;
 	color: #45d4bc;
 	text-align: center;
-    line-height: 50px;
-    font-size: 25px;
+    font-size: 20px;
     font-family: 'hw';
-    padding: 0 30px;
+    padding: 0px 50px;
     font-weight: bold;
 }
+.navbar>a span:nth-of-type(1){
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: url(../images/my.png) no-repeat;
+    background-size: 40px auto;
+}
+.navbar>a span:nth-of-type(2){
+    line-height: 10px;
+    display: block;
+}
+
 .navbar>a:nth-of-type(2) {
 	backgroun d-color: #f00000;
 }
+/*end 导航*/
+
+
 .page0,#work,.page2,.page3 {
 	width: 100%;
 	
@@ -68,13 +93,53 @@
 	height: 600px;
 	background: #8CCCF3;
 }
-.home_top {
-	width: 100%;
-	height: 600px;
-	background: url(../images/home_bg.png) no-repeat;
-	background-size: 100% 600px;
-}
 
+/*首页*/
+.home {
+    width: 100%;
+    padding-top: 60px;
+    background: url(../images/bg_index.png) repeat-x;
+}
+.home_top {
+	width: 1100px;
+	/*height: 600px;*/
+    position: relative;
+    margin: 0 auto;
+}
+.home_top a {
+    width: 38px;
+    height: 50px;
+    position: absolute;
+    top: 50%;
+    margin-top: -25px;
+}
+.home_top a.arrow_left {
+    left: -40px;
+    background: url(../images/arrow_l.png) no-repeat;
+}
+.home_top a.arrow_right {
+    right: -40px;
+    background: url(../images/arrow_r.png) no-repeat;
+}
+.t_con_w {   
+    width: 900px;
+    height: 420px;
+    background: #fff;
+    margin: 0 auto;
+    position: relative;
+}
+.t_con {
+    width: 1100px;
+    height: 500px;
+    background: url(../images/leaf_bg.png) no-repeat;
+    background-size: 1100px 500px;
+    position: absolute;
+    margin-left: -100px;
+    margin-top: -54px;
+}
+.home_mid {
+    padding-top: 100px;
+}
 /*work*/
 #work {
 	height: 100%;

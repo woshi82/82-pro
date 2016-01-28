@@ -53,8 +53,6 @@ homeModule.directive('canvaswave',['$timeout', '$rootScope',function($timeout,$r
                 window.requestAnimationFrame(function(){
                     _this.frame(line);
                 });
-
-
             };
 
             function line(p){
