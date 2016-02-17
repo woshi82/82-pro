@@ -1,55 +1,38 @@
 [
 {
-	"image": "./images/2.jpg",
-	"title": "lalal",
-	"detail": "828282"	
+	"image": "../images/content/2.png",
+	"title": "UI前端",
+	"time": "2天前"	
 },
 {
-
-	"title": "lalal",
-	"detail": "828282"	
+	"image": "../images/content/3.png",
+	"title": "UI前端",
+	"time": "2天前"	
 },
 {
-	"image": "./images/1.jpg",
-	"title": "lalal",
-	"detail": "828282"	
+	"image": "../images/content/4.png",
+	"title": "UI前端",
+	"time": "2天前"	
 },
 {
-	"title": "lalal",
-	"detail": "828282"	
+	"image": "../images/content/3.png",
+	"title": "UI前端",
+	"time": "2天前"	
 },
 {
-	"title": "lalal",
-	"detail": "828282"	
+	"image": "../images/content/2.png",
+	"title": "UI前端",
+	"time": "2天前"	
 },
 {
-	"image": "./images/2.jpg",
-	"title": "lalal",
-	"detail": "828282"	
+	
+	"image": "../images/content/1.png",
+	"title": "UI前端",
+	"time": "2天前"	
 },
 {
-	"title": "lalal",
-	"detail": "828282"	
-},
-{
-	"image": "./images/2.jpg",
-	"title": "lalal",
-	"detail": "828282"	
-},
-{
-	"image": "./images/1.jpg",
-	"title": "lalal",
-	"detail": "828282"	
-},
-{
-	"image": "./images/2.jpg",
-	"title": "lalal",
-	"detail": "828282"	
-},
-{
-	"image": "./images/2.jpg",
-	"title": "lalal",
-	"detail": "828282"	
+	"image": "../images/content/3.png",
+	"title": "UI前端",
+	"time": "2天前"	
 }
-
 ]

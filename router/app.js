@@ -1,4 +1,4 @@
-var routerApp = angular.module('routerApp', ['ui.router', 'HomeModule', 'WaterfallModule']);
+var routerApp = angular.module('routerApp', ['ui.router','MainModule', 'HomeModule', 'WaterfallModule','ExpModule']);
 
 routerApp.run(function($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
@@ -23,19 +23,19 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                 }
             }
         })
-        .state('index.page1', {
-            url: '/page1',
+        .state('index.share', {
+            url: '/share',
             views: { 
                 'main@index': {
-                    templateUrl: 'template/page1.html'
+                    templateUrl: 'template/share.html'
                 }
             }
         })
-        .state('index.page2', {
-            url: '/page2',
+        .state('index.experience', {
+            url: '/experience',
             views: { 
                 'main@index': {
-                    templateUrl: 'template/page2.html'
+                    templateUrl: 'template/experience.html'
                 }
             }
         })
