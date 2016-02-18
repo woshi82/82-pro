@@ -315,7 +315,7 @@ expModule.directive('canvasPlane',['$timeout', '$rootScope',function($timeout,$r
     return {
         restrict: 'AE',
         replace: true,   
-        template: '<canvas width="900" height="1000"></canvas>',
+        template: '<canvas width="900" height="630"></canvas>',
         link: function(scope, element, attrs) {
             var JCM = new matIV();
             // console.log(JCM.create())
@@ -745,10 +745,10 @@ expModule.directive('canvasPlane',['$timeout', '$rootScope',function($timeout,$r
                 }
                 requestAnimationFrame(letGo)
             };
-            // canvasPlaneBezier([{x: 800,y:100},{x: 400,y:150},{x: 300,y:300}],1000,'linear')
+            
             canvasPlane.translate.x = 800;
             canvasPlane.translate.y = 100;
-            canvasPlane.rotate.x = -40;
+            // canvasPlane.rotate.x = -40;
             go()
             function go(){
                 ctx.clearRect(0,0,900,1200);
@@ -757,6 +757,38 @@ expModule.directive('canvasPlane',['$timeout', '$rootScope',function($timeout,$r
                 ctx.restore();
                 requestAnimationFrame(go);
             }
+            canvasPlaneBezier([{x: 800,y:100},{x: 400,y:150},{x: 300,y:300}],1200,'linear')
+            // var initSTop = 0,
+            //     bS = true;
+            // $('.experience').on('scroll', function(ev){
+            //     // console.log(ev)
+            //     // console.log($(this).scrollTop());
+            //     if(!bS) return;
+
+            //     var nowSTop = $(this).scrollTop();
+                
+            //     if(nowSTop - initSTop >= 0){
+            //         // console.log('xia')
+            //         if(scrollTop > 0 && scrollTop <= 100){
+            //             bS = false;
+            //             $(this).animate({'scrollTop': 500},300,'linear',function(){
+            //                 bS = true;
+            //                 nowSTop = $(this).scrollTop();
+            //                 initSTop = nowSTop;
+            //             });
+            //         }
+            //         else if(scrollTop > 500 && scrollTop <= 600){
+            //             // $(this).scrollTo(1000,500);
+            //             $(this).animate({'scrollTop': 1000},300);
+
+            //         }
+            //     }else{
+            //         // console.log('shang')
+            //     };
+            //     setTimeout(function(){
+            //         initSTop = nowSTop;
+            //     },0)
+            // })
 
 
 

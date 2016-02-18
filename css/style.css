@@ -59,6 +59,12 @@ body {
     font-family: 'hw';
     padding: 0px 50px;
     font-weight: bold;
+    transition: .5s;
+    -webkit-transition: .5s;
+}
+.navbar>a span {
+    transition: .5s;
+    -webkit-transition: .5s;
 }
 .navbar>a span:nth-of-type(1){
     display: inline-block;
@@ -230,13 +236,74 @@ body {
 .experience {
     width: 100%;
     padding-top: 80px;
-    background: url(../images/exp_bg.png);
+    /*background: url(../images/exp_bg.png);*/
+    overflow: hidden;
+
+}
+.expWrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
 }
 .experience .canvasPlaneWrap {
     width: 900px;
-
-    margin: 0 auto;
+    height: 100%;
+    /*margin: 0 auto;*/
+    position: absolute;
+    left: 50%;
+    margin-left: -450px;
 }
+
+.block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.block1 {   
+    background: url(../images/exp_bg1.png) repeat-x;
+    background-size: 1px 100%;
+}
+.block2 {   
+    background: url(../images/exp_bg2.png) repeat-x;
+    background-size: 1px 100%;
+}
+.block2 {   
+    background: url(../images/exp_bg3.png) repeat-x;
+    background-size: 1px 100%;
+}
+.blockDot {
+    width: 20px;
+    height:60px;
+    position: absolute;
+    top: 50%;
+    margin-top: -30px;
+    right: 20px; 
+}
+.blockDot a{
+    display: block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    
+    
+}
+.blockDot a span{
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    /*margin: 0 auto;*/
+    line-height: 20px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+.blockDot a.active span {
+    width: 12px;
+    height: 12px;
+}
+
 .share_list{
     width: 1100px;
     margin:0 auto 20px;
