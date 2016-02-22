@@ -4,24 +4,23 @@ var ShareData = require('../models/shareData'),
     multer = require('multer');
 
 var app = global.app;
-app.locals.firstMuch = 6;
 
 exports.getList = function (req,res){ 
-    var firstPageMuch = app.locals.firstMuch;
     var params = req.body;
     console.log(params)
     var test = {
             image: 'images/content/1.png',
-            title: 'UI前端'
+            title: '其他的其他',
+            href: 'www.baidu.com',
+            qrCode: 'images/content/code1.png',
+            describe: '随便说点什么了什么了什么了',
+            from: '个人'
         };
-    _shareData = new ShareData(test);
+    // _shareData = new ShareData(test);
     // _shareData.save(function(err, list){
-        // console.log('chenggong')
-        // res.send({
-        //     lists: lists
-        // })
-
-        ShareData.firstPage(firstPageMuch, function(err, lists){
+    //     console.log('chenggong')
+        
+        ShareData.paging(params.page,params.n, function(err, lists){
             if (err) {
                 console.log(err)
             }
@@ -44,9 +43,22 @@ exports.getList = function (req,res){
     //         res.render('index',{
     //           lists: readImg(sources)
     //         })
-    //     })
+    //     })    
+}
+
+exports.getListDet = function (req,res){ 
+    var id = req.body.id;
     
-      
+    ShareData.findById(id, function(err, detail){
+        if (err) {
+            console.log(err);
+        };
+        // console.log(lists);
+        res.send({
+            detail: detail
+        });
+    });
+
 }
 
 exports.getMore = function (req,res){   

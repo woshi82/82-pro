@@ -5,6 +5,9 @@ waterfallModule.directive('waterfall', function($timeout, $window, WaterfallList
         restrict:"AE",
         replace: true,
         transclude: true,
+        scope:{
+            sharedetails: '='
+        },
         template: '<ul class="share_list" ng-transclude></ul>',
         link: function(scope,element,attrs){
             var $waterfall = element,
@@ -16,7 +19,7 @@ waterfallModule.directive('waterfall', function($timeout, $window, WaterfallList
                 n_p = 0,//当前页数
                 n = 6,  //一次请求数量
                 i_now = 0;
-            
+            // console.log(scope.sharedetail);
             element.bind('mouseenter', function(event) {
                 //scope.loadData();
                 // scope.$apply("loadData()");
@@ -27,31 +30,38 @@ waterfallModule.directive('waterfall', function($timeout, $window, WaterfallList
             //     reset_c();
             // })
             reqData();
-            $('.main').scroll(function(){
-                console.log(window.scrollTop()+window.height() >= $waterfall.height() + $waterfall.offset().top)
+            $('.share').scroll(function(){
+                // console.log(window.scrollTop()+window.height() >= $waterfall.height() + $waterfall.offset().top)
                 if(canGet && window.scrollTop()+window.height() >= $waterfall.height() + $waterfall.offset().top){
                     reqData();
                 }
             })
-            // $waterfall.on('click', '.waterfall_wrap',function(){
-            //     $('#modal-overlay').addClass('open');
-            // })
-            // $('#modal-overlay').on('click','.close-modal', function(){
-            //     $(this).parents('#modal-overlay').removeClass('open');
-            // })
-            // $.ajax({
-            //     type: 'POST',
-            //     url:"/getShareList",
-            //     success: function (data){
-            //             console.log(data);
-            //     }
-            // });
+            $waterfall.on('click', 'li>a',function(){
+                console.log($(this).attr('data-target'));
+                WaterfallList.getWaterfallDetData($(this).attr('data-target'))
+                    .success(function(data, status){
+                        if(data.detail){
+                            scope.sharedetails = data.detail;
+                            $('#modal-overlay').addClass('open');
+                        }
+                    })
+
+            });
+            $('#modal-overlay').on('click','.close-modal', function(){
+                $(this).parents('#modal-overlay').removeClass('open');
+            });
             function reqData(){
                 $timeout(function(){
                     WaterfallList.getWaterfallData(n_p, n)
                         .success(function(data, status){
-                            console.log(data)
-                            create_c(data.lists);
+                            var lists = data.lists;
+                            var len = lists.length;
+                                console.log(lists)
+                            // if(!len)return;
+                            if(lists.length > 0){
+                                n_p++;
+                                create_c(lists);
+                            };
                         })
                 },200);
             }
@@ -62,9 +72,9 @@ waterfallModule.directive('waterfall', function($timeout, $window, WaterfallList
 
                 for (var i = 0; i < data.length; i++) {
                     if(data[i].image){
-                        str += '<li><a href="javascript:;"><img src="'+ data[i].image +'" /> <div class="info"> <div class="title">'+ data[i].title +'</div> <div class="time">'+ data[i].detail +'</div> </div> </a></li>';
+                        str += '<li><a href="javascript:;" data-target="'+data[i]._id+'"><img src="'+ data[i].image +'" /> <div class="info"> <div class="title">'+ data[i].title +'</div> <div class="time"></div> </div> </a></li>';
                     }else{
-                        str += '<a class="waterfall_wrap"> <div class="waterfall_wrap_b"><h3 class="title">'+ data[i].title +'</h3> <p class="detail">'+ data[i].detail +'</p> </div> </a>' ; 
+                        str += '<a class="waterfall_wrap"> <div class="waterfall_wrap_b"><h3 class="title">'+ data[i].title +'</h3> <p class="detail"></p> </div> </a>' ; 
                     }
                 };
                 $waterfall.append(str);
@@ -141,19 +151,34 @@ waterfallModule.directive('waterfall', function($timeout, $window, WaterfallList
 
 waterfallModule.factory('WaterfallList', ['$http', function($http){
     var reqWaterfallData = function(n_p, n){
-        return $http({
-            method: 'POST',
-            url: 'getShareList',
-            data:{
-                page : 100
-            }
-        })
-    }
+            return $http({
+                method: 'POST',
+                url: 'getShareList',
+                data:{
+                    page : n_p,
+                    n: n
+                }
+            }).error(function(status){
+                console.log('请求数据失败了 ' + status);
+            })
+        },
+        reqWaterfallDetData = function(id){
+            return $http({
+                method: 'POST',
+                url: 'getShareListDet',
+                data:{
+                    id : id
+                }
+            }).error(function(status){
+                console.log('请求数据失败了 ' + status);
+            })
+        };
     return{
-        'getWaterfallData':function(n_p, n){
-
-            // console.log(223334)          
+        'getWaterfallData':function(n_p, n){         
             return reqWaterfallData(n_p, n)
+        },
+        'getWaterfallDetData':function(id){         
+            return reqWaterfallDetData(id)
         }
     }
 }]);

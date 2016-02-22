@@ -37,6 +37,12 @@ mainModule.directive('navbar',['$timeout', '$rootScope','$location',function($ti
 
 
 
+var shareModule = angular.module("ShareModule", []);
+shareModule.controller('shareController',['$scope',function($scope){
+    console.log('shareController')
+    $scope.shareDetails = {};
+}])
+
 var homeModule = angular.module("HomeModule", []);
 
 homeModule.directive('hometop',['$rootScope',function($rootScope) {

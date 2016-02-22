@@ -6,6 +6,10 @@ var shareDataSchema = new Schema({
 	// uploader: {type: ObjectId, ref: 'Users'},
 	image: String,
 	title: String,
+	href: String,
+    qrCode: String,
+    describe: String,
+    from: String,
     meta: {
 		createAt: {
 			type: Date,
@@ -49,7 +53,7 @@ shareDataSchema.statics = {
 		return this
 			.find({})
 			.sort({'meta.updateAt':-1})
-			.skip(fp+much*pn)
+			.skip(much*pn)
 			// .skip(fp+much*pn)
 			.limit(much)
 			.exec(cb)

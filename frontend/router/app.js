@@ -1,4 +1,4 @@
-var routerApp = angular.module('routerApp', ['ui.router','MainModule', 'HomeModule', 'WaterfallModule','ExpModule']);
+var routerApp = angular.module('routerApp', ['ui.router','MainModule', 'HomeModule', 'ShareModule','WaterfallModule','ExpModule']);
 
 routerApp.run(function($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
@@ -27,7 +27,8 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             url: '/share',
             views: { 
                 'main@index': {
-                    templateUrl: 'template/share.html'
+                    templateUrl: 'template/share.html',
+                    controller: 'shareController'
                 }
             }
         })

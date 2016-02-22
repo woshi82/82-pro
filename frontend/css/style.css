@@ -114,12 +114,11 @@ body {
     -webkitbox-sizing: border-box;
     top: 0;
 }
-
-
 .home,.share,.experience {
     height: 100%;
     overflow: auto;
 }
+
 /*首页*/
 .home {
     width: 100%;
@@ -225,10 +224,11 @@ body {
     width: 100%;
     height: 100%;
 }
-/*share*/
 
+/*分享页*/
 .share {
     background-color: #FBFBF8;
+    position: relative;
 }
 .share_t {
     width: 100%;
@@ -270,6 +270,7 @@ body {
 
 }
 /*end share*/
+
 /*experience*/
 .experience {
     width: 100%;
@@ -426,6 +427,301 @@ body {
     font-size: 16px;
 }
 /*end experience*/
+
+/*模态框*/
+#modal-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+    background: rgba(35,35,35,0.85);
+    z-index: 0;
+    overflow: hidden;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transition: all 0.25s ease-in-out;
+    -webkit-transition-delay: 0.4s;
+    -moz-transition: all 0.25s ease-in-out 0.4s;
+    -o-transition: all 0.25s ease-in-out 0.4s;
+    transition: all 0.25s ease-in-out 0.4s;
+}
+#modal-overlay.open {
+    visibility: visible;
+    z-index: 8;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+    opacity: 1;
+    -webkit-transition: all 0.25s ease-in-out;
+    -webkit-transition-delay: 0s;
+    -moz-transition: all 0.25s ease-in-out 0s;
+    -o-transition: all 0.25s ease-in-out 0s;
+    transition: all 0.25s ease-in-out 0s;
+}
+#modal-overlay .angle-cover {
+    display: block;
+    position: absolute;
+    width: 106%;
+    left: -3%;
+    height: 0;
+    z-index: 0;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: all 0.4s ease-in-out;
+    -webkit-transition-delay: 0s;
+    -moz-transition: all 0.4s ease-in-out 0s;
+    -o-transition: all 0.4s ease-in-out 0s;
+    transition: all 0.4s ease-in-out 0s;
+    background-color: #5bf6dd;
+}
+#modal-overlay .angle-cover.before {
+    top: 50%;
+}
+#modal-overlay .angle-cover.after {
+    bottom: 50%;
+}
+#modal-overlay.open .angle-cover {
+    height: 16%;
+    padding: 1px;
+    -webkit-transition: all 0.4s ease-in-out;
+    -webkit-transition-delay: 0.25s;
+    -moz-transition: all 0.4s ease-in-out 0.25s;
+    -o-transition: all 0.4s ease-in-out 0.25s;
+    transition: all 0.4s ease-in-out 0.25s;
+}
+#modal-overlay.open .angle-cover.before {
+    top: 11.25%;
+    -webkit-transform: rotate(2.15deg);
+    -moz-transform: rotate(2.15deg);
+    -ms-transform: rotate(2.15deg);
+    -o-transform: rotate(2.15deg);
+    transform: rotate(2.15deg); 
+}
+#modal-overlay.open .angle-cover.after {
+    bottom: 11.25%;
+    -webkit-transform: rotate(-2.15deg);
+    -moz-transform: rotate(-2.15deg);
+    -ms-transform: rotate(-2.15deg);
+    -o-transform: rotate(-2.15deg);
+    transform: rotate(-2.15deg);
+}
+#modal-overlay #modal-content {
+    width: 100%;
+    height: 0px;
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    left: 0;
+    background-color: #5bf6dd;
+    /*background-color: #f8c9c5;*/
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.4s ease-in-out;
+    -webkit-transition-delay: 0s;
+    -moz-transition: all 0.4s ease-in-out 0s;
+    -o-transition: all 0.4s ease-in-out 0s;
+    transition: all 0.4s ease-in-out 0s;
+}
+#modal-overlay.open #modal-content {
+    height: 68%;
+    top: 16%;
+    overflow: hidden;
+    -webkit-transition: all 0.4s ease-in-out;
+    -webkit-transition-delay: 0.25s;
+    -moz-transition: all 0.4s ease-in-out 0.25s;
+    -o-transition: all 0.4s ease-in-out 0.25s;
+    transition: all 0.4s ease-in-out 0.25s;
+}
+#modal-overlay #modal-content .close-modal {
+    position: absolute;
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: url(../images/icon-close.png) center center no-repeat;
+    background-size: 40px 40px;
+    top: 0px;
+    right: 39px;
+    z-index: 10;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transition: all 0.25s ease-in-out;
+    -webkit-transition-delay: 0s;
+    -moz-transition: all 0.25s ease-in-out 0s;
+    -o-transition: all 0.25s ease-in-out 0s;
+    transition: all 0.25s ease-in-out 0s;
+}
+#modal-overlay.open #modal-content .close-modal {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+    opacity: 0.5;
+}
+#modal-overlay.open #modal-content .close-modal:hover {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+    opacity: 1;
+}
+#modal-overlay #modal-content .single-contribution-wrapper, #modal-overlay #modal-content .contribute-form-wrapper {
+    width: 100%;
+    height: 0;
+    position: relative;
+    z-index: 5;
+    overflow: hidden;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.4s ease-in-out;
+    -webkit-transition-delay: 0s;
+    -moz-transition: all 0.4s ease-in-out 0s;
+    -o-transition: all 0.4s ease-in-out 0s;
+    transition: all 0.4s ease-in-out 0s;
+}
+#modal-overlay #modal-content .single-contribution-wrapper {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+#modal-overlay.open #modal-content .single-contribution-wrapper, #modal-overlay.open #modal-content .contribute-form-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    /*height: auto;*/
+    position: relative;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+    opacity: 1;
+    -webkit-transition: all 0.4s ease-in-out;
+    -webkit-transition-delay: 0.25s;
+    -moz-transition: all 0.4s ease-in-out 0.25s;
+    -o-transition: all 0.4s ease-in-out 0.25s;
+    transition: all 0.4s ease-in-out 0.25s;
+}
+
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-image, #modal-overlay #modal-content .single-contribution-wrapper .contribution-text {
+    display: block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+    float: left;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transition: all 0.4s ease-in-out;
+    -webkit-transition-delay: 0s;
+    -moz-transition: all 0.4s ease-in-out 0s;
+    -o-transition: all 0.4s ease-in-out 0s;
+    transition: all 0.4s ease-in-out 0s;
+}
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-text {
+    width: 60%;
+    margin: auto;
+    padding: 0 2.5%;
+}
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-image {
+    width: 40%;
+    margin: auto;
+    /*padding: 0 2.5%;*/
+}
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-image a{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-image img{
+    display: block;
+    max-width: 80%;
+    max-height: 80%;
+    margin: 0 auto;
+
+}
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-image p{
+    text-align: center;
+    line-height: 50px;
+    color: #616161;
+    font-size: 20px;
+    font-weight: bold;
+}
+#modal-overlay.open #modal-content .single-contribution-wrapper .contribution-image, #modal-overlay.open #modal-content .single-contribution-wrapper .contribution-text, #modal-overlay.open #modal-content .single-contribution-wrapper .share-contribution, #modal-overlay.open #modal-content .contribute-form-wrapper .contribution-image, #modal-overlay.open #modal-content .contribute-form-wrapper .contribution-text, #modal-overlay.open #modal-content .contribute-form-wrapper .share-contribution {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+    opacity: 1;
+}
+.content .single-contribution-wrapper .contribution-text .wrapper {
+    text-align: center;
+}
+
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-text .from{
+    color: #616161;
+    font-size: 14px;
+}
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-text .from span{
+    /*color: #241f21;*/
+
+}
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-text .descrip{
+    line-height: 30px;
+    font-size: 20px;
+    text-align: center;
+    color: #241f21;
+    padding: 15px 0 20px 0;
+
+}
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-text .view p{
+    font-size: 14px;
+    color: #616161;
+    line-height: 25px;
+}
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-text .view a{
+    color: #616161;
+}
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-text .view img {
+    width: 50px;
+    height: 50px;
+    background-color: #616161;
+    margin-top: 4px;
+    margin-left: 74px;
+}
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-text .operation {
+    text-align: center;
+    padding-top: 15px;
+}
+
+
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-text .operation a {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #616161;
+    background: url(../images/icon-praise.png) no-repeat 10px;
+    background-size: 30px auto;
+}
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-text .operation span.active {
+
+    border: 1px solid #241f21;
+    background: url(../images/icon-praise-a.png) no-repeat 10px;
+    background-size: 30px auto;
+}
+/*end 模态框*/
 
 
 
