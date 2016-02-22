@@ -1,0 +1,24 @@
+include ../layout
+block content
+.content
+  .items_list_wrap
+    ul#items_list
+      each list in lists
+        li.inner
+          a(target="_blank" href="./detail/#{list._id}")
+            img(src="#{list.previewImg}")
+          .bottom
+            p
+              span.author
+                img(src="images/author.png")
+                span #{list.author}
+            h4.title
+              a(target="_blank" href="./detail/#{list._id}") #{list.title}
+            p.number
+              span.glyphicon.glyphicon-thumbs-up
+              span 6
+              span.glyphicon.glyphicon-comment
+              span 4
+              span.glyphicon.glyphicon-share-alt
+              span 9
+script(src="./js/index.js")

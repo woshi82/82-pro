@@ -1,0 +1,45 @@
+include ../layout
+block content
+.content
+  .row
+    form.form-horizontal#form_mark(method="post", enctype="multipart/form-data", action="/submit_item")
+      .form-group
+        label.col-sm-2.control-label(for="previewImg") 上传图片
+          em.emph *
+        .col-sm-10.imgWrap
+          .selectImg 选择图片
+            input.inputPreviewImg(type="file", name="previewImg")
+          .tips 
+            p 单张图片10M以内，RGB模式，支持jpg/gif/png格式，单边长度不能超过4096 * 4且宽高乘积不能超过4096 * 4096。
+            p 允许上传30张图片，支持批量上传。
+          ul.previewImgList.previewList    
+      .form-group
+        label.col-sm-2.control-label(for="appendix") 上传压缩包
+          em.emph *
+        .col-sm-10.appendixWrap
+          .selectAppendix 选择附件
+            input.inputAppendix(type="file", name="appendix")
+          .tips 
+            p 单张图片10M以内，R 
+          ul.previewAppendixList.previewList
+      .form-group
+        label.col-sm-2.control-label(for="inputTitle") 标题
+          em.emph *
+        .col-sm-10.inputWrap
+          input#inputTitle.form-control(type="text", name="source[title]", value="")
+      .form-group
+        label.col-sm-2.control-label(for="inputDescribe") 描述
+          em.emph *
+        .col-sm-10.inputWrap
+          textarea#inputDescribe.form-control(name="source[describe]") 
+      .form-group
+        label.col-sm-2.control-label(for="inputTags") 标签
+          em.emph *
+        .col-sm-10.inputWrap
+          input#inputTags.form-control(type="text", name="source[tags]", value="")
+          input(type="hidden", name="source[uploader]", value="#{user._id}")
+      .form-group
+        .col-sm-2
+        .col-sm-10
+          .btn.btn-default#submit 确定
+script(src="/js/upload.js")

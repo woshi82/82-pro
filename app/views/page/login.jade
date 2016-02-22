@@ -1,0 +1,27 @@
+doctype
+html
+  head
+    meta(charset="utf-8")
+    title #{title}
+    include ../includes/head
+  body
+    block content
+      #header
+        h1 登录
+      .container
+        .row
+          form.form-horizontal#form_mark(method="post", enctype="multipart/form-data", action="/verify")
+            .form-group
+              label.col-sm-2.control-label(for="username") 用户名
+              .col-sm-10.control-label
+                input#username(type="text", name="username")
+            .form-group
+              label.col-sm-2.control-label(for="password") 密码
+              .col-sm-10
+                input#password.form-control(type="password", name="password", value="")
+            .form-group
+              .col-sm-offset-2.col-sm-4
+              br
+              a(href="javascript:;", onclick="check()") 登 录
+              script(src="./js/login.js")
+

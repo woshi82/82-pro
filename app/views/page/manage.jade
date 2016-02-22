@@ -1,0 +1,14 @@
+include ../layout
+block content
+.content
+  #header
+    h1 图片管理
+  .row
+    .col-md-12
+      ul.manageList
+        each list in lists
+          li.clearfix
+            a(target="_blank" href="./detail/#{list._id}") #{list.title}
+            a.btn.btn-primary.delete.pull-right(href='javascript:;' sourceId= '#{list._id}') 删除
+            a.btn.btn-primary.pull-right(href="./detail/#{list._id}") 详细
+script(src="../../js/manage.js")

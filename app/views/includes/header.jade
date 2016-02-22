@@ -1,0 +1,74 @@
+.head
+  nav.navbar.navbar-default
+    .container-fluid
+      // Brand and toggle get grouped for better mobile display
+      .navbar-header
+        button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#main-menu', aria-expanded='false')
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href='/') Brand
+      #main-menu.collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li
+            a(href='#')
+              | Home 
+              span.sr-only (current)
+          li
+            a(href='#') Link
+          li.dropdown
+            a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+              | Dropdown 
+              span.caret
+            ul.dropdown-menu
+              li
+                a(href='#') Action
+              li
+                a(href='#') Another action
+              li
+                a(href='#') Something else here
+              li.divider(role='separator')
+              li
+                a(href='#') Separated link
+              li.divider(role='separator')
+              li
+                a(href='#') One more separated link
+          li
+            a(href='/finduser') 查看用户
+          li
+            a(href='#') about
+        .search-form
+          #search.search_box 
+            form#searchform(role="search")
+              label.hide-clip(for="s") 请输入关键词进行搜索
+              input(type="text" name="s" id="s" value="")
+        .userWrap.pull-right
+          if user 
+            span.userHi Hi~ #{user.username}    
+            a.useButton(href="/logout") 注销
+            a.useButton(href="/upload") 上传
+            a.useButton(href="/manage") 管理
+            a.useButton(href="/admin/personal") 云上传
+          else
+            a.useButton(href="javascript:;", type='button', data-toggle='modal', data-target='#myModal') 登录
+        #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+          #login.modal-dialog(role='document')
+            .modal-content
+              .modal-header
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                  span(aria-hidden='true') ×
+                h4#myModalLabel.modal-title 用户登录
+              .modal-body
+                form
+                  .form-group
+                    label(for='exampleInputEmail1') 用户名
+                    input#username.form-control(type='text', placeholder='用户名')
+                  .form-group
+                    label(for='exampleInputPassword1') 密码
+                    input#password.form-control(type='password', placeholder='密码')
+                  p#loginInfo
+              .modal-footer
+                button#load.btn.btn-primary(type='button') 登录
+                button.btn.btn-success(type='button') 注册
+script(src="/js/login.js")

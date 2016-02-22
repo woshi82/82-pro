@@ -1,0 +1,50 @@
+include ../layout
+block content
+#uploadWindow
+  .uTitle.gradient
+    span 上传
+    .uBtn
+      a.glyphicon.glyphicon-chevron-up#moveWindow(href="javascript:;") 
+      a.glyphicon.glyphicon-remove#closeWindow(href="javascript:;") 
+  .uCon
+    ul.list.uploadWindowList
+.content
+  .topBar
+    span
+      a.icon-btn-upload#cloudeUpload(href="javascript:void(0);")
+        span.ico
+        span.text 上传文件
+      form.form-horizontal#global_uploader_form(method="post", enctype="multipart/form-data", action="javascript:;" role="form")
+        input.global_uploader#global_uploader1(name="globalUploader" type="file")
+    a.createfile(href="javascript:void(0);") 新建文件夹
+  .catalog.clearfix 
+    .crumbs 
+      //a.item(href="javascript:void(0);") 返回上一级
+      //|  | 
+      a.item.btnAll(href="javascript:void(0);") 全部文件
+      //|  >                
+      // .item images2
+    span.loaded 已全部加载，共30个
+  .clearfix
+    .col-md-12
+      .pTitle
+        input#sAll.check(type='checkbox')
+        .name 
+          |文件名
+        .sAllBtn
+            |已选中
+            span.num 4
+            |个文件/文件夹
+            a.btn.btn-primary(href='#', role='button')
+              span.glyphicon.glyphicon-download-alt 下载   
+            a.btn.btn-success(href='#', role='button')
+              span.glyphicon.glyphicon-thumbs-up 分享   
+            a.btn.btn-warning(href='#', role='button')
+              span.glyphicon.glyphicon-trash 删除   
+        .size 大小
+        .date 修改日期
+      ul.personList
+        
+
+script(src="/js/manage.js")        
+

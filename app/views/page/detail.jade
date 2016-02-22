@@ -1,0 +1,35 @@
+include ../layout
+block content
+.content
+  .position
+    span 当前位置：
+    a(href='index.html') 首页
+    span  >
+    a(href='')  最新素材
+    span >
+    a(href='') #{list.title}
+  h3.detail_t #{list.title}
+  .left_con.pull-left
+    each previewImg in list.aPreviewImg
+      img(src='#{previewImg}')
+    ul.detail
+      li 编号：#{list._id} 
+      li 上传时间：#{moment(list.meta.updateAt).format('MM/DD/YYYY')}
+      li
+        | 大小：402.218 M
+      li 分辨率：350dpi
+      li 尺寸：7000×4500像素  
+      li 格式：PSD (CS3) 
+      li 颜色：RGB 
+  .right_con.pull-right
+    p.shengming
+      | 原创设计普通用户每小时限下载1次
+      | VIP特权用户可多次下载
+    a.download(href='#{list.appendix}' )
+      span.glyphicon.glyphicon-download-alt
+      | 下载
+    p.message
+      span 浏览：172  
+      span 下载：54
+      span 收藏：4
+

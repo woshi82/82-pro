@@ -1,0 +1,37 @@
+include ../layout
+block content
+.container
+  .row
+    form.form-horizontal#form_mark(method="post", enctype="multipart/form-data", action="/submit_item")
+      .form-group
+        label.col-sm-2.control-label(for="inputPreviewImg") 预览图链接
+        .col-sm-10
+          input#inputPreviewImgLink.form-control(type="text", name="item[previewImgLink]", value="")
+      .form-group
+        label.col-sm-2.control-label(for="inputPreviewImg") 上传预览图
+        .col-sm-10.control-label
+          input#inputPreviewImg(type="file", name="previewImg")
+      .form-group
+        label.col-sm-2.control-label(for="inputLink") 图片点击链接
+        .col-sm-10
+          input#inputLink.form-control(type="text", name="item[link]", value="")
+      .form-group
+        label.col-sm-2.control-label(for="inputTitle") 标题
+        .col-sm-10
+          input#inputTitle.form-control(type="text", name="item[title]", value="")
+      .form-group
+        label.col-sm-2.control-label(for="inputDescribe") 描述
+        .col-sm-10
+          input#inputDescribe.form-control(type="text", name="item[describe]", value="")
+      .form-group
+        label.col-sm-2.control-label(for="inputTags") 标签
+        .col-sm-10
+          input#inputTags.form-control(type="text", name="item[tags]", value="")
+      .form-group
+        label.col-sm-2.control-label(for="inputAuthor") 作者
+        .col-sm-10
+          input#inputAuthor.form-control(type="text", name="item[author]", value="")
+      .form-group
+        .col-sm-offset-2.col-sm-4
+        .btn.btn-default#submit 录入
+script(src="./js/admin.js")
