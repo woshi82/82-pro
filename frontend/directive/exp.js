@@ -1,4 +1,14 @@
 var expModule = angular.module("ExpModule", []);
+expModule.directive('clouds',['$timeout', '$rootScope',function($timeout,$rootScope) {
+    return {
+        restrict: 'AE',
+        replace: true,   
+        template: '<div class="clouds"><div class="cloud move"><p class="cloudCon">waha哇哈哈哈哈</p></div></div>',
+        link: function(scope, element, attrs) {
+            
+        }
+    }
+}]);
 expModule.directive('canvasPlane',['$timeout', '$rootScope',function($timeout,$rootScope) {
     return {
         restrict: 'AE',
@@ -425,7 +435,9 @@ expModule.directive('canvasPlane',['$timeout', '$rootScope',function($timeout,$r
                 ctx.clearRect(0,0,900,H*3);
                 canvasPlane.render(ctx);
                 requestAnimationFrame(go);
-            }
+            };
+
+            // 飞机出场动画
             canvasPlaneBezier([{x: 220,y:H - 50},{x: -600,y:-200},{x: 1800,y:0},{x: -100,y:H - 300},{x: 500,y: H - 100}],5200,'linear',function(){});
             TweenMax.to(canvasPlane.rotate, 2, {x:80,y:-10,'onComplete':function(){
                 TweenMax.to(canvasPlane.rotate, 1.8, {x:20,'onComplete':function(){
@@ -477,15 +489,15 @@ expModule.directive('canvasPlane',['$timeout', '$rootScope',function($timeout,$r
                 if(ev.delta < 0){
                     if( iNow < blockLen-1) {
                         canScroll = false;
-                        $block.eq(iNow).css({'-webkit-transform': 'translateY(-100%)','transform': 'translateY(-100%)'});
+                        // $block.eq(iNow).css({'-webkit-transform': 'translateY(-100%)','transform': 'translateY(-100%)'});
                         iNow++;
-                        $block.eq(iNow).css({'-webkit-transform': 'translateY(0)','transform': 'translateY(0)'});
-                        if(iNow==1){
-                            fly_pro1();
-                        }else if(iNow==2){
-                            fly_pro2();
-                        };
-                        element.css({'-webkit-transform': 'translate(0,'+-H+'px)','transform': 'translate(0,'+-iNow*H+'px)','transition': '1.5s'})
+                        // $block.eq(iNow).css({'-webkit-transform': 'translateY(0)','transform': 'translateY(0)'});
+                        // if(iNow==1){
+                        //     fly_pro1();
+                        // }else if(iNow==2){
+                        //     fly_pro2();
+                        // };
+                        // element.css({'-webkit-transform': 'translate(0,'+-H+'px)','transform': 'translate(0,'+-iNow*H+'px)','transition': '1.5s'})
                         $blockDotA.eq(iNow).addClass('active').siblings().removeClass('active');
                         setTimeout(function(){
                             canScroll = true;
@@ -494,16 +506,16 @@ expModule.directive('canvasPlane',['$timeout', '$rootScope',function($timeout,$r
                 }else if(ev.delta > 0){
                    if( iNow > 0) {
                         canScroll = false;
-                        $block.eq(iNow).css({'-webkit-transform': 'translateY(100%)','transform': 'translateY(100%)'});
+                        // $block.eq(iNow).css({'-webkit-transform': 'translateY(100%)','transform': 'translateY(100%)'});
                         iNow--;
-                        $block.eq(iNow).css({'-webkit-transform': 'translateY(0)','transform': 'translateY(0)'});
+                        // $block.eq(iNow).css({'-webkit-transform': 'translateY(0)','transform': 'translateY(0)'});
                         $blockDotA.eq(iNow).addClass('active').siblings().removeClass('active');
-                        if(iNow==0){
-                            fly_back_pro1();
-                        }else if(iNow==1){
-                            fly_back_pro2();
-                        };
-                        element.css({'-webkit-transform': 'translate(0,'+-H+'px)','transform': 'translate(0,'+-iNow*H+'px)','transition': '1.5s'});
+                        // if(iNow==0){
+                        //     fly_back_pro1();
+                        // }else if(iNow==1){
+                        //     fly_back_pro2();
+                        // };
+                        // element.css({'-webkit-transform': 'translate(0,'+-H+'px)','transform': 'translate(0,'+-iNow*H+'px)','transition': '1.5s'});
                         setTimeout(function(){
                             canScroll = true;
                         },1500)

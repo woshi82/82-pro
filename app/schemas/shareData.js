@@ -10,6 +10,7 @@ var shareDataSchema = new Schema({
     qrCode: String,
     describe: String,
     from: String,
+    praiseNum: Number,
     meta: {
 		createAt: {
 			type: Date,
@@ -24,8 +25,10 @@ var shareDataSchema = new Schema({
 
 shareDataSchema.pre('save', function(next){
 	var user = this;
+	console.log('isNew::'+this.isNew )
 	if(this.isNew) {
-		this.meta.createAt = this.meta.updateAt = Date.now();
+		this.meta.createAt = Date.now();
+		this.meta.updateAt = Date.now();
 	}
 	else {
 		this.meta.updateAt = Date.now();
@@ -38,13 +41,13 @@ shareDataSchema.statics = {
 	fetch: function (cb) {
 		return this
 			.find({})
-			.sort({'meta.updateAt':-1})
+			.sort({'meta.createAt':-1})
 			.exec(cb)
 	},
 	firstPage: function (much,cb) {
 		return this
 			.find({})
-			.sort({'meta.updateAt':-1})
+			.sort({'meta.createAt':-1})
 			.limit(much)
 			.exec(cb)
 	},
@@ -52,7 +55,7 @@ shareDataSchema.statics = {
 		// var fp = 6;
 		return this
 			.find({})
-			.sort({'meta.updateAt':-1})
+			.sort({'meta.createAt':-1})
 			.skip(much*pn)
 			// .skip(fp+much*pn)
 			.limit(much)

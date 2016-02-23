@@ -6,7 +6,8 @@ waterfallModule.directive('waterfall', function($timeout, $window, WaterfallList
         replace: true,
         transclude: true,
         scope:{
-            sharedetails: '='
+            sharedetails: '=',
+            sharepraise: '='
         },
         template: '<ul class="share_list" ng-transclude></ul>',
         link: function(scope,element,attrs){
@@ -37,16 +38,29 @@ waterfallModule.directive('waterfall', function($timeout, $window, WaterfallList
                 }
             })
             $waterfall.on('click', 'li>a',function(){
-                console.log($(this).attr('data-target'));
-                WaterfallList.getWaterfallDetData($(this).attr('data-target'))
+                
+                var id = $(this).attr('data-target');
+                scope.sharepraise = 'active';
+                WaterfallList.getWaterfallDetData(id)
                     .success(function(data, status){
                         if(data.detail){
                             scope.sharedetails = data.detail;
+                            console.log(data.hasPraise)
+                            if(data.hasPraise) scope.sharepraise = '';
                             $('#modal-overlay').addClass('open');
                         }
                     })
 
             });
+            $('.sharePraise').on('click',function(){
+                if(!scope.sharepraise) return;
+                var id = $(this).parents('#modal-overlay').attr('dataID');
+                WaterfallList.getSharePraise(id)
+                    .success(function(data){
+                        scope.sharedetails.praiseNum = data.praiseNum;
+                        scope.sharepraise = '';
+                    })
+            })
             $('#modal-overlay').on('click','.close-modal', function(){
                 $(this).parents('#modal-overlay').removeClass('open');
             });
@@ -56,7 +70,7 @@ waterfallModule.directive('waterfall', function($timeout, $window, WaterfallList
                         .success(function(data, status){
                             var lists = data.lists;
                             var len = lists.length;
-                                console.log(lists)
+                                // console.log(lists)
                             // if(!len)return;
                             if(lists.length > 0){
                                 n_p++;
@@ -172,6 +186,17 @@ waterfallModule.factory('WaterfallList', ['$http', function($http){
             }).error(function(status){
                 console.log('请求数据失败了 ' + status);
             })
+        },
+        reqSharePraise = function(id){
+            return $http({
+                method: 'POST',
+                url: 'getSharePraise',
+                data:{
+                    id : id
+                }
+            }).error(function(status){
+                console.log('请求数据失败了 ' + status);
+            })
         };
     return{
         'getWaterfallData':function(n_p, n){         
@@ -179,6 +204,9 @@ waterfallModule.factory('WaterfallList', ['$http', function($http){
         },
         'getWaterfallDetData':function(id){         
             return reqWaterfallDetData(id)
+        },
+        'getSharePraise':function(id){         
+            return reqSharePraise(id)
         }
     }
 }]);

@@ -14,7 +14,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session');
-
+var cookieParser = require('cookie-parser');
 var mongoStore = require('connect-mongo')(session);
 var dataBaseUrl = 'mongodb://localhost/82Pro';
 
@@ -31,6 +31,18 @@ app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
     extended: true
 }));
 app.use(express.static(BASE_DIR, {}));
+//配置session、cookie
+app.use(cookieParser());
+
+app.use(session({
+    secret: '82Pro',
+    store: new mongoStore({
+        url: dataBaseUrl,
+        collection: 'session',
+        key:'express.sid'
+    })
+}));
+
 //链接数据库
 mongoose.connect(dataBaseUrl);
 

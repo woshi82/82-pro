@@ -7,6 +7,7 @@ module.exports = function(app){
 	//分享页
 	app.post('/getShareList', Share.getList);
 	app.post('/getShareListDet', Share.getListDet);
+	app.post('/getSharePraise', Share.getPraise);
 
 	/**
 	 * 生成 404 页面 HTML

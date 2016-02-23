@@ -7,7 +7,7 @@
 
 	</div>
 	<div class="splitLine"></div>
-	<div shareDetails="shareDetails" waterfall>
+	<div shareDetails="shareDetails" sharePraise="sharePraise" waterfall>
 		
 	</div>
 
@@ -22,7 +22,7 @@
 	</ul> -->
 </div>
  <!-- class="open -->
-<div id="modal-overlay">
+<div id="modal-overlay" dataID="{{shareDetails._id || ''}}">
 	<div class="angle-cover before">
 		<div class="bg"></div>
 	</div>
@@ -50,13 +50,13 @@
 					<div class="view">
 						<p>
 							预览地址：
-							<a href="javascript:;">{{shareDetails.href || ''}}</a>
+							<a href="{{shareDetails.href || ''}}" target="_blank">{{shareDetails.href || ''}}</a>
 							
 						</p>
 						<img class="QRCode" src="{{shareDetails.qrCode || ''}}"/>
 					</div>
 					<div class="operation">
-						<a href="javascript:;" class="icon icon-praise active"></a>
+						<a href="javascript:;" class="icon icon-praise sharePraise {{sharePraise}} ">{{shareDetails.praiseNum || ''}}</a>
 					</div>
 				</div>
 			</div>

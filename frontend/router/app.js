@@ -1,4 +1,4 @@
-var routerApp = angular.module('routerApp', ['ui.router','MainModule', 'HomeModule', 'ShareModule','WaterfallModule','ExpModule']);
+var routerApp = angular.module('routerApp', ['ui.router','MainModule', 'HomeDireModule', 'ShareModule','WaterfallModule','ExpModule']);
 
 routerApp.run(function($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;

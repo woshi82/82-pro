@@ -211,6 +211,16 @@ body {
     width: 900px;
     margin: 0 auto 200px;
 }
+.home_mid .canvasWaveWrap0 {
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+#canvasStar {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 .authorPhoto {
     position: absolute;
     bottom: -108px;
@@ -312,7 +322,9 @@ body {
             filter: blur(10px);    
 }
 .block1 {   
-    background: url(../images/exp_bg1.png) repeat-x;
+    /*background: #3385ff;*/
+    /*background: #45d4bc;*/
+    background: url(../images/exp_bg3.png) repeat-x;
     background-size: 1px 100%;
     transform: translateY(0);
     -webkit-transform: translateY(0);
@@ -333,6 +345,48 @@ body {
     height: 100%;
     position: relative;
 }
+.clouds {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.clouds>div {
+    top: 50%;
+    left: 50%;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+}
+.cloud {
+   width: 60px; 
+   height: 60px; 
+   margin-left: -30px;
+   margin-top: -30px;
+   background: url(../images/cloud1.png) no-repeat;
+   background-size: 60px auto;
+   /*background: rgba(255,255,255,.6);*/
+   position: absolute;
+   /*top: 0;
+   left: 0;*/
+   
+   transform: translate(0) scale(.3);
+}
+.cloudCon {
+    line-height: 25px;
+    color: #999;
+    padding: 10px;
+    font-size: 12px;
+}
+.move {
+    animation: 3s move;
+}
+@keyframes move{
+    100%{
+        transform: translate(-200px, 100px) scale(1.6);
+    }
+} 
+
+
+
 .expDetail {
     width: 300px;
     position: absolute;
@@ -417,9 +471,9 @@ body {
     padding: 0 20px;
 }
 .share_list li .title{
-    line-height: 32px;
-    color: #fae991;
-    font-size: 26px;
+   line-height: 47px;
+    color: #9E7E6B;
+    font-size: 20px;
 }
 .share_list li .time{
     line-height: 26px;
@@ -480,7 +534,7 @@ body {
     -moz-transition: all 0.4s ease-in-out 0s;
     -o-transition: all 0.4s ease-in-out 0s;
     transition: all 0.4s ease-in-out 0s;
-    background-color: #5bf6dd;
+    background-color: #f8c9c5;
 }
 #modal-overlay .angle-cover.before {
     top: 50%;
@@ -520,8 +574,8 @@ body {
     z-index: 10;
     top: 50%;
     left: 0;
-    background-color: #5bf6dd;
     /*background-color: #f8c9c5;*/
+    background-color: #f8c9c5;
     padding: 0;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -633,12 +687,12 @@ body {
     transition: all 0.4s ease-in-out 0s;
 }
 #modal-overlay #modal-content .single-contribution-wrapper .contribution-text {
-    width: 60%;
+    width: 55%;
     margin: auto;
     padding: 0 2.5%;
 }
 #modal-overlay #modal-content .single-contribution-wrapper .contribution-image {
-    width: 40%;
+    width: 45%;
     margin: auto;
     /*padding: 0 2.5%;*/
 }
@@ -708,17 +762,19 @@ body {
 
 #modal-overlay #modal-content .single-contribution-wrapper .contribution-text .operation a {
     display: inline-block;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 20px;
+    padding-top: 40px;
     border-radius: 50%;
     border: 1px solid #616161;
-    background: url(../images/icon-praise.png) no-repeat 10px;
+    background: url(../images/icon-praise.png) no-repeat 15px 10px;
     background-size: 30px auto;
+    color: #616161;
 }
-#modal-overlay #modal-content .single-contribution-wrapper .contribution-text .operation span.active {
-
+#modal-overlay #modal-content .single-contribution-wrapper .contribution-text .operation a.active {
+    color:#241f21 ;
     border: 1px solid #241f21;
-    background: url(../images/icon-praise-a.png) no-repeat 10px;
+    background: url(../images/icon-praise-a.png) no-repeat 15px 10px;
     background-size: 30px auto;
 }
 /*end 模态框*/
