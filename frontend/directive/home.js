@@ -36,143 +36,91 @@ homeDireModule.directive('canvasstar',['$timeout', '$rootScope',function($timeou
         link: function(scope, element, attrs) {
         	var canvas = element[0],
         		ctx = canvas.getContext('2d'),
-        		H = 1000;
+        		H = 1000,W = 900;
     		canvas.height = H;
         	function star(ctx,H){
         		this.ctx = ctx;
                 this.H = H;
         		this.W = 900;
-        		this.N = 80;
+        		this.N = 100;
         		this.stars = [];
-                this.Tween = {                    
-                    linear: function (t, b, c, d){  //匀速
-                        return c*t/d + b;
-                    }
-                }
+                this.lt = Date.now();
+                this.s_I = 200;
+
         		this.init();
         	};
             star.prototype.init = function(){
                 var _this = this;
-                for (var i = 0; i < this.N; i++) {
-                    // var i = 0;
-                    this.stars.push(this.starReset());
-                    (function(i){
-                        requestAnimationFrame(function(){
-                            // console.log(i)
-                            starFrameGo(i);
-                        })  ;            
-                    })(i);                        
-                };
-                function starFrameGo(i){
-                    _this.starFrame(_this.stars[i],{
-                        from: {
-                            x:_this.stars[i].bx,
-                            y:_this.stars[i].by                            
-                        },
-                        to: {
-                            x:_this.stars[i].ex,
-                            y:_this.stars[i].ey                            
-                        },
-                        opacity:_this.stars[i].bopacity,
-                        r: _this.stars[i].r
-                    },_this.stars[i].time,'linear',function(){
-                        _this.stars[i] = _this.starReset();
-                        // console.log(_this.stars[0])
-                        requestAnimationFrame(function(){
-                            starFrameGo(i);
-                        });                        
-                    });
-
-                };
                 this.frame();
             };
-            star.prototype.starReset = function(){
-                var oStar = {};
-                oStar.bx = 200 + Math.random()*(this.W-400);
-                oStar.by = 50 + Math.random()*(this.H-100);
-                oStar.x = oStar.bx;
-                oStar.y = oStar.by;
-                oStar.r = 2 + Math.random()*1;
-                oStar.ex = 200 + Math.random()*(this.W-400);
-                oStar.ey = 50 + Math.random()*(this.H-100);
-                oStar.bopacity = 0.5 + Math.random()*.5;
-                oStar.opacity = 0;
-                oStar.time=Math.floor(2e3*Math.random()) + 10e3;
-                return oStar;
-            };
+            star.prototype.selfRenewal = function(){
+                var nt = Date.now();
+                if(nt - this.lt >= this.s_I && this.stars.length < this.N){
+                    this.lt = nt;
+                    this.stars.push(new starC(this.ctx));                       
+                }
+            }
             star.prototype.frame = function(){
                 var _this = this;
+                var t = Date.now();
+                this.selfRenewal();
                 _this.ctx.clearRect(0,0,_this.W,_this.H);
-                for (var i = 0; i < _this.N; i++) {
-                    _this.drawRound(_this.stars[i]);
+                for (var i = 0; i < this.stars.length; i++) {
+                    _this.stars[i].draw(t);
                 };
                 requestAnimationFrame(function(){ _this.frame();});
+            };
+            
+            function starC(ctx){
+                this.W = W;
+                this.H = H;
+                this.ctx = ctx;
+                this.life = this.roundR(10e3,12.2e3);
+                this.showt = this.hidet = 1000;
+                this.reset();
 
             };
-            star.prototype.drawRound = function(obj){
-                this.ctx.fillStyle='rgba(255,255,255,'+obj.opacity+')';
+            starC.prototype.reset = function(){
+                this.st = Date.now();
+                this.bx = this.roundR(50,this.W);
+                this.by = this.roundR(50,this.H);
+                this.x = this.bx;
+                this.y = this.by;
+                this.br = this.roundR(2,3);
+                this.ex = this.roundR(50,this.W);
+                this.ey = this.roundR(50,this.H);
+                this.bopacity = this.roundR(0.5,1);
+                this.opacity = 0;
+                this.r = 0;
+            };
+            starC.prototype.update = function(nt){
+                var p = nt - this.st,
+                    r = 1,
+                    rg = p/this.life;
+
+                if(this.life - p <= 0){
+                    this.reset();
+                }else{
+                    if(p<this.showt){
+                        r = p/this.showt;
+                    }else if (p > this.life-this.hidet) {
+                        r = 1-p/this.life;
+                    };
+                    this.opacity = r*this.bopacity;
+                    this.r = r*this.br;
+                    this.x = rg*(this.ex-this.bx)+this.bx;
+                    this.y = rg*(this.ey-this.by)+this.by;                    
+                };
+            }
+            starC.prototype.draw = function(nt){
+                this.update(nt);
+                this.ctx.fillStyle='rgba(255,255,255,'+this.opacity+')';
                 this.ctx.beginPath();
-                this.ctx.arc(obj.x,obj.y,obj.r,0,2*Math.PI);
+                this.ctx.arc(this.x,this.y,this.r,0,2*Math.PI);
                 this.ctx.fill();
-            };
-            star.prototype.starFrame = function(obj,oVal,time,fx,cb){
-                var _this = this;
-                var s_t1 = new Date().getTime();
-                var showTime = 500;
-                var hideTime = 300;
-                requestAnimationFrame(showGo);
-
-                function showGo(){
-                    var n_t1 = new Date().getTime(),
-                        progress1 = n_t1 - s_t1,
-                        showStop = progress1 > showTime;
-                    var point = _this.Tween[fx](progress1,0,1,showTime);
-                    obj.opacity = oVal.opacity*point;
-                    obj.r = oVal.r-2 + 2*point;
-                    if(showStop){
-                        requestAnimationFrame(move);
-                    }else{
-                        requestAnimationFrame(showGo);
-                    };
-                };
-                function move(){
-                    var s_t2 = new Date().getTime();
-                    requestAnimationFrame(moveGo);     
-                    function moveGo(){
-                        var n_t2 = new Date().getTime(),
-                            progress2 = n_t2 - s_t2,
-                            stop = progress2 > time;
-
-                        var point = _this.Tween[fx](progress2,0,1,time);
-                        for (var attr in oVal.from) {
-                            obj[attr] = oVal.from[attr] + (oVal.to[attr]-oVal.from[attr])*point;
-                        };
-                        if(stop){
-                            requestAnimationFrame(hide);
-                        }else{
-                            requestAnimationFrame(moveGo);
-                        };
-                    };
-                };
-                function hide(){
-                    var s_t3 = new Date().getTime();
-                    requestAnimationFrame(hideGo);
-                    function hideGo(){
-                        var n_t3 = new Date().getTime(),
-                            progress3 = n_t3 - s_t3,
-                            hideStop = progress3 > hideTime;
-
-                        var point = _this.Tween[fx](progress3,0,1,hideTime);
-                        obj.opacity = oVal.opacity*(1-point);
-                        obj.r = oVal.r - 2*point;
-                        
-                        if(hideStop){
-                            cb&&cb();
-                        }else{
-                            requestAnimationFrame(hideGo);
-                        };
-                    };
-                };
+            }
+            starC.prototype.roundR = function(b,e){
+                return b + Math.random()*(e-b);
             };
 
         	var Star = new star(ctx,H);

@@ -357,23 +357,23 @@ body {
     -webkit-transform-style: preserve-3d;
 }
 .cloud {
-   width: 60px; 
-   height: 60px; 
-   margin-left: -30px;
-   margin-top: -30px;
+   width: 200px; 
+   height: 200px; 
+   margin-left: -100px;
+   margin-top: -100px;
    background: url(../images/cloud1.png) no-repeat;
-   background-size: 60px auto;
+   background-size: 200px auto;
    /*background: rgba(255,255,255,.6);*/
    position: absolute;
    /*top: 0;
    left: 0;*/
    
-   transform: translate(0) scale(.3);
+   /*transform: translate(0) scale(.3);*/
 }
 .cloudCon {
     line-height: 25px;
     color: #999;
-    padding: 10px;
+    padding: 30px;
     font-size: 12px;
 }
 .move {
