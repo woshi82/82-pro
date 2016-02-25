@@ -45,7 +45,7 @@ homeDireModule.directive('canvasstar',['$timeout', '$rootScope',function($timeou
         		this.N = 100;
         		this.stars = [];
                 this.lt = Date.now();
-                this.s_I = 200;
+                this.s_I = 100;
 
         		this.init();
         	};

@@ -328,6 +328,7 @@ body {
     background-size: 1px 100%;
     transform: translateY(0);
     -webkit-transform: translateY(0);
+    position: relative;
     
 }
 .block2 {   
@@ -338,7 +339,11 @@ body {
     background: url(../images/exp_bg3.png) repeat-x;
     background-size: 1px 100%;
 }
-
+#canvasPlane {
+    position: absolute;
+    left: 0;
+    top:0;
+}
 .blockWrap {
     width: 900px;
     margin: 0 auto;
