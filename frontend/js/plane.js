@@ -236,7 +236,7 @@
             };
 
             // 飞机动画
-            function planeMove(canvasPlane){
+            function PlaneMove(canvasPlane){
                 this.H = window.innerHeight-78;
                 this.W = (window.innerWidth<1200)?1200:window.innerWidth;
                 this.Tween = {
@@ -257,11 +257,11 @@
                     } 
                 };
                 this.canvasPlane = canvasPlane;
-                this.move();
+                // this.move();
             };
 
             // 获取切线角度
-            planeMove.prototype.getDeg = function(p1,p2){
+            PlaneMove.prototype.getDeg = function(p1,p2){
                 var dis = Math.sqrt(Math.pow(p1.x-p2.x,2) + Math.pow(p1.y-p2.y,2)),
                     innePro = p1.x-p2.x,
                     multDif = p2.y-p1.y,
@@ -269,7 +269,7 @@
                 deg = (multDif > 0)?-deg*180/Math.PI:deg*180/Math.PI;
                 return deg;
             };
-            planeMove.prototype.higherBezierCurve = function(aPoints,rate){
+            PlaneMove.prototype.higherBezierCurve = function(aPoints,rate){
                 var _this = this;
                 var a = aPoints,
                     len = a.length,
@@ -291,7 +291,7 @@
                 };
             };
             // 飞机贝塞尔曲线变换
-            planeMove.prototype.canvasPlaneBezier = function(aPoints,time,fx,cb){
+            PlaneMove.prototype.canvasPlaneBezier = function(aPoints,time,fx,cb){
                 var _this = this;
                 var startTime = new Date().getTime();
                 function letGo(){
@@ -321,31 +321,11 @@
                 }
                 requestAnimationFrame(letGo)
             };
-            planeMove.prototype.move = function(){
+            PlaneMove.prototype.move = function(){
                 var _this = this;
                 // wingFly();
                 // bodyFly();
-                // _this.canvasPlane.rotate.z = 100;
-                // _this.canvasPlane.rotate.y = -10;
-                // _this.canvasPlane.rotate.x = 68;
-                _this.canvasPlane.rotate.z = -30;
-                _this.canvasPlane.rotate.y = -30;
-                _this.canvasPlane.rotate.x = 30;
-
-                _this.canvasPlane.translate.x = 550;
-                _this.canvasPlane.translate.y = 150;
-                // _this.canvasPlane.translate.x = 220;
-                // _this.canvasPlane.translate.y = _this.H - 50;
-
-                // 飞机出场动画
-                // _this.canvasPlaneBezier([{x: 220,y:_this.H - 50},{x: -600,y:-200},{x: 1800,y:0},{x: -100,y:_this.H - 300},{x: 500,y: _this.H - 100}],5200,'linear',function(){});
-                _this.canvasPlaneBezier([{x: _this.W/2,y:_this.H - 50},{x: -1000,y:-200},{x: _this.W*2.2,y:0},{x: -100,y:_this.H - 300},{x: _this.W/5*3,y: _this.H - 100}],5200,'linear',function(){});
-                TweenMax.to(_this.canvasPlane.rotate, 2, {x:80,y:-10,'onComplete':function(){
-                    TweenMax.to(_this.canvasPlane.rotate, 1.8, {x:20,'onComplete':function(){
-                        TweenMax.to(_this.canvasPlane.rotate, 1.4, {x:68,y:5, ease: Power1.easeInOut});
-
-                    }});
-                }});
+                
 
             };
 
