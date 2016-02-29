@@ -1,6 +1,6 @@
-var homeDireModule = angular.module("HomeDireModule", []);
+var homeModule = angular.module("HomeModule", []);
 
-homeDireModule.directive('hometop',['$rootScope',function($rootScope) {
+homeModule.directive('hometop',['$rootScope',function($rootScope) {
     return {
         restrict: 'AE',
         replace: true,  
@@ -28,237 +28,66 @@ homeDireModule.directive('hometop',['$rootScope',function($rootScope) {
     }
 
 }]);
-homeDireModule.directive('canvasstar',['$timeout', '$rootScope',function($timeout,$rootScope) {
+homeModule.directive('home',['$timeout', '$rootScope',function($timeout,$rootScope) {
     return {
         restrict: 'AE',
-        replace: true, 
-        template: '<canvas id="canvasStar" width="900"></canvas>',
+        replace: true,
+        transclude: true, 
+        template: '<div class="home" ng-transclude></div>',
         link: function(scope, element, attrs) {
-        	var canvas = element[0],
-        		ctx = canvas.getContext('2d'),
-        		H = 1000,W = 900;
-    		canvas.height = H;
-        	function star(ctx,H){
-        		this.ctx = ctx;
-                this.H = H;
-        		this.W = 900;
-        		this.N = 100;
-        		this.stars = [];
-                this.lt = Date.now();
-                this.s_I = 100;
+            var homeMidT = $('.home_mid').offset().top,
+                $tech = $('.tech'),
+                techL = $tech.length;
+            var oldY = element.scrollTop(),
+                bScroll = true;
+            element.on('scroll', function(ev){
+                if(!bScroll) return;
+                var nowY = $(this).scrollTop();
+                if(nowY - oldY > 0){
 
-        		this.init();
-        	};
-            star.prototype.init = function(){
-                var _this = this;
-                this.frame();
-            };
-            star.prototype.selfRenewal = function(){
-                var nt = Date.now();
-                if(nt - this.lt >= this.s_I && this.stars.length < this.N){
-                    this.lt = nt;
-                    this.stars.push(new starC(this.ctx));                       
-                }
-            }
-            star.prototype.frame = function(){
-                var _this = this;
-                var t = Date.now();
-                this.selfRenewal();
-                _this.ctx.clearRect(0,0,_this.W,_this.H);
-                for (var i = 0; i < this.stars.length; i++) {
-                    _this.stars[i].draw(t);
+                    for (var i = 0; i < techL; i++) {
+                        var thisTech = $tech.eq(i);
+                        if(nowY >= thisTech.offset().top-180){
+                            // console.log(thisTech.offset().top + '::'+nowY)
+                            if(!thisTech.hasClass('techMove')){
+                                thisTech.addClass('techMove');
+                            };
+                            if(i >= techL-1){
+                                bScroll = false;
+                            }
+                        }  
+                    }
+
                 };
-                requestAnimationFrame(function(){ _this.frame();});
-            };
-            
-            function starC(ctx){
-                this.W = W;
-                this.H = H;
-                this.ctx = ctx;
-                this.life = this.roundR(10e3,12.2e3);
-                this.showt = this.hidet = 1000;
-                this.reset();
-
-            };
-            starC.prototype.reset = function(){
-                this.st = Date.now();
-                this.bx = this.roundR(50,this.W);
-                this.by = this.roundR(50,this.H);
-                this.x = this.bx;
-                this.y = this.by;
-                this.br = this.roundR(2,3);
-                this.ex = this.roundR(50,this.W);
-                this.ey = this.roundR(50,this.H);
-                this.bopacity = this.roundR(0.5,1);
-                this.opacity = 0;
-                this.r = 0;
-            };
-            starC.prototype.update = function(nt){
-                var p = nt - this.st,
-                    r = 1,
-                    rg = p/this.life;
-
-                if(this.life - p <= 0){
-                    this.reset();
-                }else{
-                    if(p<this.showt){
-                        r = p/this.showt;
-                    }else if (p > this.life-this.hidet) {
-                        r = 1-p/this.life;
-                    };
-                    this.opacity = r*this.bopacity;
-                    this.r = r*this.br;
-                    this.x = rg*(this.ex-this.bx)+this.bx;
-                    this.y = rg*(this.ey-this.by)+this.by;                    
-                };
-            }
-            starC.prototype.draw = function(nt){
-                this.update(nt);
-                this.ctx.fillStyle='rgba(255,255,255,'+this.opacity+')';
-                this.ctx.beginPath();
-                this.ctx.arc(this.x,this.y,this.r,0,2*Math.PI);
-                this.ctx.fill();
-            }
-            starC.prototype.roundR = function(b,e){
-                return b + Math.random()*(e-b);
-            };
-
-        	var Star = new star(ctx,H);
+            });
     	}
 
 	}
 }]);
-homeDireModule.directive('canvaswave',['$timeout', '$rootScope',function($timeout,$rootScope) {
+homeModule.directive('canvaswave',['$timeout', '$rootScope',function($timeout,$rootScope) {
     return {
         restrict: 'AE',
         replace: true,   
         link: function(scope, element, attrs) {
-            var parent = element.parents('.home_mid');          
-            // console.log(element.parent('.page0').width())
-            function lines(){
-                this.canvas = element[0];
-                this.ctx = this.canvas.getContext('2d');
-                this.W = element.width();
-                this.H = 1500;
-                this.aLine = [{'posX': 20},{'posX': 220},{'posX': 450},{'posX': 680},{'posX': 880}];
-                this.oLines= [];
-                this.gener();
-                this.resize();
-                // window.onresize = function(){
-                //     // this.W = parent.width(),
-                //     // this.H =window.innerHeight*2;
-                //     this.resize();
-                // };
+            var W = 900;
+            var H = 1500;
 
-            }
-            lines.prototype.resize = function(){
-                // this.canvas.width = this.W;
-                this.canvas.height = this.H;
-                // this.canvas.style.width = this.W;
-                this.canvas.style.height = this.H;
-            };
-            lines.prototype.line = line;
-            lines.prototype.gener = function(){
-                for (var i = 0; i < this.aLine.length; i++) {
-                    var tt = new this.line(this);
-                    this.oLines.push(tt);
-                    this.oLines[i].reset(this.aLine[i]);
-                    
-                };
-                this.frame();
-            }
+            var stage = new Container({W: W,H:H,id: 'canvasHome'});
 
-            lines.prototype.frame = function(){
-                var _this = this;
-                this.ctx.clearRect(0,0,this.W,this.H);
-                for (var i = 0; i < _this.oLines.length; i++) {
-                    _this.oLines[i].draw();
-                };
-                window.requestAnimationFrame(function(){
-                    _this.frame();
-                });
-            };
+            var Lines = new lines({W: W,H:H});
+            var Star = new star({W: W,H:H});
 
-            function line(p){
-                this.p = p;
-                this.ss = 40;
-                this.T = 300;
-                this.ww = Math.PI*2/this.T;
-                this.Ao;
-                this.posX = 0;
-                this.len = 0;
-                this.length = this.p.H;
-                this.s_v = Math.random()+2;
-            };
-            line.prototype.reset = function(json){
-                for(var attr in json){
-                    this[attr] = json[attr];
-                }
-            };
-            line.prototype.draw = function(){
-                var H = this.p.H;
-                this.ss += 1;
-                this.len = this.length;
-                // this.len = (this.len> this.length )? this.length :(this.len += this.s_v);
-                this.p.ctx.beginPath();
-                // this.p.ctx.moveTo(0, H+0.5);
-                this.p.ctx.strokeStyle = '#40bda8';
-                this.staticA = 20;
-                this.deltT = 0;
-                this.tdeltX = this.p.W/2 - this.posX;
-                for (var i = 0; i <= this.len ; i++) {
-
-                    var A = this.staticA;
-                    // var A = 30*((H/2 - Math.abs(i - H/2)) /H/2);
-                    // console.log( (H/2 - Math.abs(i - H/2))/(H/2) )
-                    // var A = (H/2 - Math.abs(i - H/2)/H/2)/(5+ss/10);
-                    // var y = ~~A*Math.sin((i- H/2-this.T/4 - this.ss*5)*this.ww );
-                    // this.p.ctx.lineTo( this.posX+0.5+y,i);
-                    // if(this.p.H - i <= 350){
-                    //     // this.deltT = this.tdeltX/350*(i-(this.p.H-350));
-                    //     this.deltT =this.tdeltX -  this.tdeltX*Math.sqrt((350-(i-(this.p.H-350)))/350);
-                    // }
-                    this.deltT = this.tdeltX-this.tdeltX*Math.sqrt( Math.sqrt((H-i)/H) );  
-
-                    if(i < 150){
-                    	A = i/150*this.staticA;
-                    };
-                    if(this.len - i < 100){
-                    	A = (this.len - i+20)/120*this.staticA;
-
-                    };
-
-                    if(this.tdeltX >= 0){
-                        var y = ~~A*Math.sin((i)*this.ww-this.ss/15 ) + this.deltT;
-                    }
-                    else {
-                        var y = ~~ -A*Math.sin((i)*this.ww-this.ss/15 ) + this.deltT;
-
-                    }
-
-                    this.p.ctx.lineTo( this.posX+0.5+y,i);
-                };
-                    
-                // y   var y = ~~this.staticA*Math.sin((this.len)*this.ww-this.ss/15 ) + this.len/8;
-                // p0  this.posX+0.5+y  this.len
-                // p1  this.p.W/2  this.p.H
-                // pc  this.posX+0.5+y
-                // var yMax = ~~this.staticA*Math.sin((this.len)*this.ww-this.ss/15 ) + this.len/8;
-                // this.p.ctx.quadraticCurveTo(this.posX+0.5+yMax,this.p.H,this.p.W/2,this.p.H);
-                this.p.ctx.stroke();
-                this.p.ctx.closePath();
-            };
-
-            new lines();
-            
-                
-            
+            stage.addChild(Lines);
+            stage.addChild(Star);
+            stage.render();
         },
-        template: '<canvas width="900"></canvas>'
+        template: '<canvas id="canvasHome" width="900"></canvas>'
    }
 }]);
 
-homeDireModule.directive('canvasparticle',['$rootScope',function($rootScope) {
+
+
+homeModule.directive('canvasparticle',['$rootScope',function($rootScope) {
     return {
         restrict: 'AE',
         replace: true,   
@@ -284,8 +113,8 @@ homeDireModule.directive('canvasparticle',['$rootScope',function($rootScope) {
 
                 var This = this;
                 this.canvas.onmousemove = function(e){
-                    This.mx = e.pageX;
-                    This.my = e.pageY;
+                    This.mx = e.pageX - element.offset().left;
+                    This.my = e.pageY - element.offset().top;
                 }
                 This.canvas.onmouseout = function(e){
                     This.mx = -1;
@@ -464,7 +293,7 @@ homeDireModule.directive('canvasparticle',['$rootScope',function($rootScope) {
     }
 
 }]);
-homeDireModule.directive('canvaslines',['$rootScope',function($rootScope) {
+homeModule.directive('canvaslines',['$rootScope',function($rootScope) {
     return {
         restrict: 'AE',
         replace: true,   

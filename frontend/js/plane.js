@@ -237,8 +237,6 @@
 
             // 飞机动画
             function PlaneMove(canvasPlane){
-                this.H = window.innerHeight-78;
-                this.W = (window.innerWidth<1200)?1200:window.innerWidth;
                 this.Tween = {
                     linear: function (t, b, c, d){  //匀速
                         return c*t/d + b;
@@ -259,7 +257,10 @@
                 this.canvasPlane = canvasPlane;
                 // this.move();
             };
-
+            PlaneMove.prototype.resize = function(oJson){
+                this.H = oJson.H;
+                this.W = oJson.W;
+            };
             // 获取切线角度
             PlaneMove.prototype.getDeg = function(p1,p2){
                 var dis = Math.sqrt(Math.pow(p1.x-p2.x,2) + Math.pow(p1.y-p2.y,2)),
@@ -327,5 +328,37 @@
                 // bodyFly();
                 
 
+            };
+
+
+            // 摆动
+            var bb = true,
+                wingStop = false;
+            var dd = true,
+                bodyStop = false;
+            function wingFly(){
+                var to = bb?60:-60,
+                    time = bb?0.8:0.9;
+                    bb=!bb;
+                TweenMax.to(canvasPlane.wings.rotate, time, {y:to, onComplete:function(){
+                    if(!wingStop){
+                        wingFly()
+                    }else{
+                        TweenMax.to(canvasPlane.wings.rotate, time, {y:0});
+
+                    };
+                }, ease: Power1.linear});
+            }                        
+            function bodyFly(){
+                var to = dd?40:-40,
+                    time = dd?0.5:0.6;
+                    dd=!dd;
+                TweenMax.to(canvasPlane.bodys.rotate, time, {y:to, onComplete:function(){
+                    if(!bodyStop){
+                        bodyFly()
+                    }else{
+                        TweenMax.to(canvasPlane.bodys.rotate, time, {y:0});
+                    };
+                }, ease: Power1.linear});
             };
 

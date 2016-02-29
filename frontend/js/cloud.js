@@ -124,7 +124,7 @@ spCloudC.prototype.draw = function(nt){
     !this.bfstop && this.float(nt);
     this.upTransform(); 
 
-    this.ctx.globalAlpha = this.alpha;                
+    // this.ctx.globalAlpha = this.alpha;                
     this.ctx.drawImage(this.pic,0,0,this.width,this.height);
     this.ctx.restore();
 };
@@ -148,8 +148,8 @@ spCloudC.prototype.floatInit = function(nt){
 	this.sft = Date.now();
 	this.fbx = this.fx = 0;
 	this.fby = this.fy = 0;
-	this.fex = this.randomRange(-15,15);
-	this.fey = this.randomRange(-15,15);
+	this.fex = this.randomRange(-25,25);
+	this.fey = this.randomRange(-25,25);
 }
 spCloudC.prototype.update = function(nt){
     this.p = nt - this.st;

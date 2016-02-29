@@ -1,6 +1,13 @@
-var waterfallModule = angular.module('WaterfallModule', []);
 
-waterfallModule.directive('waterfall', function($timeout, $window, WaterfallList) {
+
+var shareModule = angular.module("ShareModule", []);
+shareModule.controller('shareController',['$scope',function($scope){
+    console.log('shareController')
+    $scope.shareDetails = {};
+    $scope.sharePraise = 'active';
+}])
+
+shareModule.directive('waterfall', function($timeout, $window, WaterfallList) {
     return {
         restrict:"AE",
         replace: true,
@@ -20,13 +27,6 @@ waterfallModule.directive('waterfall', function($timeout, $window, WaterfallList
                 n_p = 0,//当前页数
                 n = 6,  //一次请求数量
                 i_now = 0;
-            // console.log(scope.sharedetail);
-            element.bind('mouseenter', function(event) {
-                //scope.loadData();
-                // scope.$apply("loadData()");
-                // 注意这里的坑，howToLoad会被转换成小写的howtoload
-                // scope.$apply(attrs.howtoload);
-            });
             // window.bind('resize',function(){
             //     reset_c();
             // })
@@ -163,7 +163,7 @@ waterfallModule.directive('waterfall', function($timeout, $window, WaterfallList
     } 
 });
 
-waterfallModule.factory('WaterfallList', ['$http', function($http){
+shareModule.factory('WaterfallList', ['$http', function($http){
     var reqWaterfallData = function(n_p, n){
             return $http({
                 method: 'POST',

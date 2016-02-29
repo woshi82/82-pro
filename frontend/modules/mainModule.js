@@ -1,5 +1,3 @@
-
-
 var mainModule = angular.module("MainModule", []);
 mainModule.directive('navbar',['$timeout', '$rootScope','$location',function($timeout,$rootScope,$location) {
     return {
@@ -8,7 +6,7 @@ mainModule.directive('navbar',['$timeout', '$rootScope','$location',function($ti
         transclude: true,
         link: function(scope, element, attrs) {
             var path = $location.$$path;
-            console.log(path)
+            // console.log(path)
             switch(path){
                 case '/index':
                 case '/index/home':
@@ -34,18 +32,3 @@ mainModule.directive('navbar',['$timeout', '$rootScope','$location',function($ti
     }
 
 }]);
-
-
-
-var shareModule = angular.module("ShareModule", []);
-shareModule.controller('shareController',['$scope',function($scope){
-    console.log('shareController')
-    $scope.shareDetails = {};
-    $scope.sharePraise = 'active';
-}])
-
-
-
-
-
-
