@@ -1,0 +1,19 @@
+{
+    "apps": [
+        {
+            "name": "82-pro",
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "env_prod": {
+                "NODE_ENV": "production"
+            },
+            "script": "server/app.js",
+            "log_date_format": "YYYY-MM-DD HH:mm:SS",
+            "instance": 4,
+            "exec_mode": "fork",
+            "watch": true,
+            "ignore_watch" : ["node_modules"]
+        }
+    ]
+}

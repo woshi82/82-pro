@@ -5,7 +5,8 @@
   "main": "server/app.js",
   "private": true,
   "scripts": {   
-    "start": "supervisor server/app"
+    "start": "supervisor server/app",
+    "pm2": "pm2 start pm2.json --env prod"
   
   },
   "keywords": [
