@@ -15,7 +15,7 @@ function spCloud(oJson){
         // ez: -this.W*7/8
     },{
         scale: .65,
-        x: -this.W/4,
+        x: -this.W/6,
         y: -this.H/3,
         z: this.W*2,
         ez: 0
@@ -45,15 +45,20 @@ spCloud.prototype.selfRenewal = function(ctx){
     var len = this.aClouds.length;
     if(nt - this.lt >= this.s_I && len < this.N){
         this.lt = nt;
-    // console.log(this.aPic)
 
         this.aClouds.push(new spCloudC({
-            pic: this.aPic[len],
+            pic:this.aPic[len],
             ctx: ctx,
             W: this.W,
             H: this.H,
             pos: this.apos[len]
         }));                       
+    };
+};
+spCloud.prototype.setPic = function(arr){
+    for (var i = 0; i < this.aClouds.length; i++) {
+
+        this.aClouds[i].resetPic(arr[i]);
     };
 };
 spCloud.prototype.draw = function(ctx){
@@ -69,17 +74,18 @@ function spCloudC(oJson){
     this.ctx = oJson.ctx;
     this.W = oJson.W;
     this.H = oJson.H;
-    this.pic = oJson.pic;
-    this.width = this.pic.width;
-    this.height = this.pic.height;
     this.life = this.randomRange(3e3,4.2e3);
     this.ox = this.W/2;
     this.oy = this.H*.4;
     this.showt = 800;
     this.hidet = 300;
     
-    this.bfirst = true;
-    this.remove = false;
+    this.pict = oJson.pic;
+    // this.width = this.pic.width;
+    // this.height = this.pic.height;
+
+    // this.bfirst = true;
+    // this.remove = false;
     this.bstop = false;
     this.bfstop = true;
 
@@ -92,6 +98,9 @@ function spCloudC(oJson){
     this.reset();
 
 };
+spCloudC.prototype.resetPic = function(pict){
+    this.pict = pict;
+};
 spCloudC.prototype.reset = function(){
     this.st = Date.now();
     this.lr = .2;
@@ -103,6 +112,12 @@ spCloudC.prototype.reset = function(){
     this.tez = this.pos.ez;
     this.balpha = this.randomRange(80,100)/100;
     this.alpha = 0;
+    
+    this.bfirst = true;
+
+    this.pic = this.pict;
+    this.width = this.pic.width;
+    this.height = this.pic.height;
     
 };
 spCloudC.prototype.stop = function(){
@@ -118,13 +133,13 @@ spCloudC.prototype.start = function(){
     
 }
 spCloudC.prototype.draw = function(nt){
-    if(this.remove) return;
+    // if(this.remove) return;
     this.ctx.save();
     !this.bstop && this.update(nt);
     !this.bfstop && this.float(nt);
     this.upTransform(); 
 
-    // this.ctx.globalAlpha = this.alpha;                
+    this.ctx.globalAlpha = this.alpha;                
     this.ctx.drawImage(this.pic,0,0,this.width,this.height);
     this.ctx.restore();
 };
@@ -132,24 +147,31 @@ spCloudC.prototype.draw = function(nt){
 spCloudC.prototype.float = function(nt){
 	var fp = nt - this.sft;
 	var r = fp/(this.flife/2);
+    var dr = 1;
 	if(fp-this.flife > 0){
 		this.floatInit();
 		return;
 	};
 	if(r <=1){
-		this.fx = r*(this.fex - this.fbx)+this.fbx;
-		this.fy = r*(this.fey - this.fby)+this.fby;
+        if(r >= .9){
+            // dr = Math.sqrt(1-(r-.9)/0.1);
+        }
+		// this.fx = dr*r*(this.fex - this.fbx)+this.fbx;
+		this.fy = dr*r*(this.fey - this.fby)+this.fby;
 	}else{
-		this.fx = (r-1)*(this.fbx - this.fex)+this.fex;
-		this.fy = (r-1)*(this.fby - this.fey)+this.fey;
+        if(r >= 1.9){
+            // dr = Math.sqrt(1-(r-1.9)/0.1);
+        };
+		// this.fx = dr*(r-1)*(this.fbx - this.fex)+this.fex;
+		this.fy = dr*(r-1)*(this.fby - this.fey)+this.fey;
 	};
 }
 spCloudC.prototype.floatInit = function(nt){
 	this.sft = Date.now();
 	this.fbx = this.fx = 0;
 	this.fby = this.fy = 0;
-	this.fex = this.randomRange(-25,25);
-	this.fey = this.randomRange(-25,25);
+	this.fex = this.randomRange(-30,30);
+	this.fey = this.randomRange(-30,30);
 }
 spCloudC.prototype.update = function(nt){
     this.p = nt - this.st;
@@ -158,9 +180,10 @@ spCloudC.prototype.update = function(nt){
 
         if(this.p<this.showt){
             r = this.p/this.showt;
-        }else if (this.p > this.life-this.hidet) {
-            r = 1-this.p/this.life;
         };
+        // else if (this.p > this.life-this.hidet) {
+        //     r = 1-this.p/this.life;
+        // };
         this.alpha = r*this.balpha;
         
         this.tz = rg*(this.tez-this.tbz)+this.tbz;
@@ -176,8 +199,9 @@ spCloudC.prototype.update = function(nt){
         if(this.tz < this.focalLength && this.bfirst){
             this.bfirst = false;
             this.stop();
-        }else if(this.tz < -this.lr*this.focalLength){
-            this.remove = true;
+        }
+        else if(this.tz < -this.lr*this.focalLength){
+            this.reset();
         };    
 };
 
@@ -210,7 +234,7 @@ function cloud(oJson){
     this.N = 20;
     this.aClouds = [];
     this.lt = Date.now();
-    this.s_I = 600;
+    this.s_I = 400;
     this.can_r = false;
     this.pic = oJson.pic;
     this.bstop = false;

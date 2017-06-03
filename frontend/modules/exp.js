@@ -1,5 +1,4 @@
 var expModule = angular.module("ExpModule", []);
-// <div class="cloud move1"><div class="cloudCon">waha哇哈哈哈哈</div></div>
 expModule.directive('clouds',['$timeout', '$rootScope',function($timeout,$rootScope) {
     return {
         restrict: 'AE',
@@ -49,7 +48,18 @@ expModule.directive('clouds',['$timeout', '$rootScope',function($timeout,$rootSc
             })(window);
 
 
-            oSprite = new ImagesLoad({cloud: 'images/cloud.png',cloud2: 'images/cloud2.png'});
+            oSprite = new ImagesLoad({
+                cloud: 'images/cloud.png',
+                cloud1: 'images/cloud1.png',
+                cloud2: 'images/cloud2.png',
+                cloud3: 'images/cloud3.png',
+                cloud4: 'images/cloud4.png',
+                cloud5: 'images/cloud5.png',
+                cloud6: 'images/cloud6.png',
+                cloud7: 'images/cloud7.png',
+                cloud8: 'images/cloud8.png',
+                cloud9: 'images/cloud9.png',
+            });
             oSprite.imagesLoaded = function(){
                 var H = window.innerHeight-78;
                 var W = (window.innerWidth<1200)?1200:window.innerWidth;
@@ -64,6 +74,12 @@ expModule.directive('clouds',['$timeout', '$rootScope',function($timeout,$rootSc
                 var planeMove = new PlaneMove(canvasPlane);
                 stage.addChild(Cloud);
                 stage.addChild(canvasPlane);
+                var aPic = [
+                    [oSprite.sprite.cloud1,oSprite.sprite.cloud2,oSprite.sprite.cloud3],
+                    [oSprite.sprite.cloud4,oSprite.sprite.cloud5,oSprite.sprite.cloud6],
+                    [oSprite.sprite.cloud7,oSprite.sprite.cloud8,oSprite.sprite.cloud9]
+                ];
+
                 stage.render();
                 
 
@@ -75,16 +91,7 @@ expModule.directive('clouds',['$timeout', '$rootScope',function($timeout,$rootSc
                         W: W
                     });
                 });
-
-                function dospCloud(arr){
-                    var spC = new spCloud({
-                        // aPic:[oSprite.sprite.cloud2],
-                        aPic:arr,
-                        W: stage.W,
-                        H: stage.H
-                    });
-                    stage.addChild(spC);
-                }
+                var spC;
 
 
                 // canvasPlane.rotate.z = 100;
@@ -112,7 +119,12 @@ expModule.directive('clouds',['$timeout', '$rootScope',function($timeout,$rootSc
                     
                    planeR1();
 
-                    dospCloud([oSprite.sprite.cloud2,oSprite.sprite.cloud2,oSprite.sprite.cloud2]);
+                    spC = new spCloud({
+                        aPic: aPic[0],
+                        W: stage.W,
+                        H: stage.H
+                    });
+                    stage.addChild(spC);
                     stageStop();
                 });
 
@@ -181,11 +193,12 @@ expModule.directive('clouds',['$timeout', '$rootScope',function($timeout,$rootSc
                             $blockDotA.eq(iNow).addClass('active').siblings().removeClass('active');
                             if(iNow == 1){
                                 planeR2();
-                                dospCloud([oSprite.sprite.cloud2,oSprite.sprite.cloud2,oSprite.sprite.cloud2]);
                             }else if(iNow == 2){
                                 planeR3();
-                                dospCloud([oSprite.sprite.cloud2,oSprite.sprite.cloud2,oSprite.sprite.cloud2]);
+                                
                             };
+                            spC.setPic(aPic[iNow]);
+
                             stage.start()
                             stageStop();   
                         };
@@ -195,12 +208,12 @@ expModule.directive('clouds',['$timeout', '$rootScope',function($timeout,$rootSc
                             iNow--;
                             $blockDotA.eq(iNow).addClass('active').siblings().removeClass('active');
                             if(iNow == 1){
-                                planeR1()
-                                dospCloud([oSprite.sprite.cloud2,oSprite.sprite.cloud2,oSprite.sprite.cloud2]);
+                                planeR1();
                             }else if(iNow == 0){
-                                planeR2()
-                                dospCloud([oSprite.sprite.cloud2,oSprite.sprite.cloud2,oSprite.sprite.cloud2]);
+                                planeR2();
                             };
+                            spC.setPic(aPic[iNow]);
+                            
                             stage.start()
                             stageStop();
                         }; 
@@ -212,95 +225,3 @@ expModule.directive('clouds',['$timeout', '$rootScope',function($timeout,$rootSc
         }
     }
 }]);
-
-// expModule.directive('canvasPlane',['$timeout', '$rootScope',function($timeout,$rootScope) {
-//     return {
-//         restrict: 'AE',
-//         replace: true,   
-//         template: '<canvas id="canvasPlane"></canvas>',
-//         link: function(scope, element, attrs) {
-            
-
-//             // 初始化
-//             var H = window.innerHeight - 78;
-//             var W = (window.innerWidth<1200)?1200:window.innerWidth;
-
-//             var canvas = element[0];
-//                 ctx = canvas.getContext('2d');
-//             canvas.style.height = H + 'px';
-//             canvas.height = H;
-//             canvas.width = W;
-            
-            
-            
-            
-
-//             // 事件绑定兼容鼠标滚轮
-//             var addEvent = (function(window, undefined) {        
-//                 var _eventCompat = function(event) {
-//                     var type = event.type;
-//                     if (type == 'DOMMouseScroll' || type == 'mousewheel') {
-//                         event.delta = (event.wheelDelta) ? event.wheelDelta / 120 : -(event.detail || 0) / 3;
-//                     }
-//                     //alert(event.delta);
-//                     if (event.srcElement && !event.target) {
-//                         event.target = event.srcElement;    
-//                     }
-//                     if (!event.preventDefault && event.returnValue !== undefined) {
-//                         event.preventDefault = function() {
-//                             event.returnValue = false;
-//                         };
-//                     }
-//                     return event;
-//                 };
-//                 if (window.addEventListener) {
-//                     return function(el, type, fn, capture) {
-//                         if (type === "mousewheel" && document.mozHidden !== undefined) {
-//                             type = "DOMMouseScroll";
-//                         }
-//                         el.addEventListener(type, function(event) {
-//                             fn.call(this, _eventCompat(event));
-//                         }, capture || false);
-//                     }
-//                 } else if (window.attachEvent) {
-//                     return function(el, type, fn, capture) {
-//                         el.attachEvent("on" + type, function(event) {
-//                             event = event || window.event;
-//                             fn.call(el, _eventCompat(event));    
-//                         });
-//                     }
-//                 }
-//                 return function() {};    
-//             })(window);
-            
-            
-
-//             go()
-//             function go(){
-//                 ctx.clearRect(0,0,W,H);
-//                 canvasPlane.render(ctx);
-//                 requestAnimationFrame(go);
-//             };
-
-            
-
-//             // setTimeout(function(){
-//             //     wingStop = true;
-//             //     bodyStop = true;
-//             //     $('.block1').removeClass('blur')
-//             //     TweenMax.to(canvasPlane.scale, 1.2, {x:.5,y:.5,z:.5});
-
-//             //     canvasPlaneBezier([{x: 410,y:H/2 - 30},{x: 1000,y:H/4 - 15},{x: 100,y:50}],5200,'linear',function(){
-
-//             //         setTimeout(function(){
-//             //             fly_pro0();
-//             //         },1000);
-//             //     });
-                   
-//             // },2000);
-
-
-            
-//         }
-//     }
-// }]);

@@ -2,7 +2,7 @@
 
 var shareModule = angular.module("ShareModule", []);
 shareModule.controller('shareController',['$scope',function($scope){
-    console.log('shareController')
+    // console.log('shareController')
     $scope.shareDetails = {};
     $scope.sharePraise = 'active';
 }])
@@ -25,11 +25,8 @@ shareModule.directive('waterfall', function($timeout, $window, WaterfallList) {
                 aLinew = [],  //固定left数组
                 canGet = true,
                 n_p = 0,//当前页数
-                n = 6,  //一次请求数量
+                n = 15,  //一次请求数量
                 i_now = 0;
-            // window.bind('resize',function(){
-            //     reset_c();
-            // })
             reqData();
             $('.share').scroll(function(){
                 // console.log(window.scrollTop()+window.height() >= $waterfall.height() + $waterfall.offset().top)
@@ -66,8 +63,11 @@ shareModule.directive('waterfall', function($timeout, $window, WaterfallList) {
             });
             function reqData(){
                 $timeout(function(){
+                            console.log('before请求数据')
+
                     WaterfallList.getWaterfallData(n_p, n)
                         .success(function(data, status){
+                            console.log('请求数据成功')
                             var lists = data.lists;
                             var len = lists.length;
                                 // console.log(lists)
@@ -94,7 +94,7 @@ shareModule.directive('waterfall', function($timeout, $window, WaterfallList) {
                 $waterfall.append(str);
                 $timeout(function(){
                     reset_c();
-                },50)
+                },150)
                 
             }
             

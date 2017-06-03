@@ -1,5 +1,29 @@
-<div ui-view="navbar"></div>
-<div class="main">
-    <div ui-view="main" autoscroll style="height: 100%;position: relative;"></div>
-	<!-- <ui-view name="main" autoscroll/> -->
+<div class="nav_w">
+    <div class="logo">
+        
+    </div>
+    <div class="navbar clearfix" navbar ng-transclude>
+        <a hr ef="#/home" ui-sref="index.home" class="active green" color="green"  dataH="home" >
+            <span class="icon iconMy"></span>
+            <span>my</span>
+        </a>
+        <a hr ef="#/share" ui-sref="index.share" color="pink" dataH="share" >
+            <span class="icon iconMy"></span>
+            <span>share</span>
+        </a>
+        <a hr ef="#/experience" ui-sref="index.experience"  color="purple" dataH="experience" >
+            <span class="icon iconMy"></span>
+            <span>experience</span>
+        </a>
+    </div>
+</div>
+<div class="tabcontent well-lg" sticky-state="index.home" >
+	<!-- <div ui-view="hometab"></div> -->
+</div>
+<div class="tabcontent well-lg" sticky-state="index.share"    >
+	<!-- <div ui-view="sharetab"></div> -->
+</div>
+<div class="tabcontent well-lg" sticky-state="index.experience"   >
+	<!-- <div ui-view="experiencetab"></div> -->
+	
 </div>
