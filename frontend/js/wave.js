@@ -26,7 +26,7 @@ function lines(oJson){
                 //     _this.draw();
                 // });
             };
-
+            // y = Asin(ωx + ψ) + B
             function line(oJson){
                 this.ss = 40;
                 this.T = 300;
@@ -54,6 +54,8 @@ function lines(oJson){
                 for (var i = 0; i <= this.len ; i++) {
 
                     var A = this.staticA;
+                    // y = x
+                    // y = √ √ x 
                     this.deltT = this.tdeltX-this.tdeltX*Math.sqrt( Math.sqrt((this.H-i)/this.H) );  
                     // 头尾振幅变小
                     if(i < 150){
