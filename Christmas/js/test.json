@@ -1,0 +1,81 @@
+{
+	"gifts": [
+			{
+				"giftType": null,
+				"id": 1,
+				"name": "甘栗",
+				"number": 30,
+				"price": "A",
+				"remain": 30,
+
+
+				"固定的需要点几下": 8,
+				"固定的生存时间": 2000
+			},
+			{
+				"giftType": null,
+				"id": 10,
+				"name": "甘栗",
+				"number": 30,
+				"price": "B",
+				"remain": 30
+			},
+			{
+				"giftType": null,
+				"id": 5,
+				"name": "甘栗",
+				"number": 30,
+				"price": "A",
+				"remain": 30
+			},
+			{
+				"giftType": null,
+				"id": 17,
+				"name": "甘栗",
+				"number": 30,
+				"price": "C",
+				"remain": 30
+			},
+			{
+				"giftType": null,
+				"id": 21,
+				"name": "甘栗",
+				"number": 30,
+				"price": "D",
+				"remain": 30
+			},
+			{
+				"giftType": null,
+				"id": 10,
+				"name": "甘栗",
+				"number": 30,
+				"price": "B",
+				"remain": 30
+			},
+			{
+				"giftType": null,
+				"id": 5,
+				"name": "甘栗",
+				"number": 30,
+				"price": "A",
+				"remain": 30
+			},
+			{
+				"giftType": null,
+				"id": 17,
+				"name": "甘栗",
+				"number": 30,
+				"price": "C",
+				"remain": 30
+			},
+			{
+				"giftType": null,
+				"id": 21,
+				"name": "甘栗",
+				"number": 30,
+				"price": "D",
+				"remain": 30
+			}
+			
+		]
+}

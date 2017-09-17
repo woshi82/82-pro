@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>圣诞快乐</title>
+	<!-- build:css dist/style.css -->
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<!-- /build -->
+	
+	<style>
+	html,body {
+		height: 100% !important;
+	}
+	</style>
+	<script type="text/javascript"> 
+	// 	if(!+[1,])alert('你的浏览器版本过低，请 <a href="http://browsehappy.com/">升级浏览器');
+	var explorer = window.navigator.userAgent ;
+		//ie 
+		// if (explorer.indexOf("MSIE") >= 0) {
+		// 	alert('你的浏览器版本过低，不能正常玩游戏哦，可以更换非IE浏览器')
+		// } 
+		if (!!window.ActiveXObject || "ActiveXObject" in window) {
+			alert('页面不支持IE内核浏览器，请点击右键切换极速模式或高速模式。')
+		}   
+	</script>
+
+
+</head>
+
+<body>
+	<section id="index" >
+		<div class="light"></div>
+		<div class="bottom"></div>
+		<div class="frag"></div>
+		<div class="xuehua"></div>
+		<div class="login_wrap">
+			<form class="login_form clear">
+				<div  class="name_wrap">
+					<label>姓名</label>
+					<input type="text" placeholder="输入您的大名" />
+				</div>
+				<div class="location_wrap">
+					<label>收货地点</label>
+					<select class="location">
+					</select>
+				</div>
+			</form>
+			<a class="login_button" id="login_button">登录</a>
+		</div>
+		<div class="man"></div>
+		<div class="title"></div>
+	</section>
+	<section id="game" style="display: none;">
+		<!-- <h1 style="font-family: w12_0; font-size: 40px;">1092354677</h1> --> 
+		<div class="xuehuas">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+		<div class="game_top"></div>
+		<div class="game_main clear">
+			<div class="tips">礼物已经被领啦</div>
+
+			<div class="canvasWrap fl">
+				<div  class="canvasCon">
+					<canvas id="susliks" width="600" height="600" style="disp lay:none;"></canvas>
+
+				</div>
+				<!-- <div class="game_mask">
+					<div class="game_mask_con clear">
+						<p>抱歉这个礼物已经被人抢走了</p>
+						<a>返回继续游戏</a>
+					</div>
+				</div> -->
+				<!-- class="hasRandom" -->
+				<div id="reward"  >
+					<div class="hdjp"></div>
+					<div class="rewardWrap ">
+						
+						<div class="reward_detail clear">
+							<div class="rewardImg fl"><img id="rewardImg" src="./images/gifts/agl.png" /></div>
+							<div class="rewardText fr">
+								<p>恭喜<span class="rewardName">xxx</span></p>
+								<p>砸中<span class="rewardResult">双人牛肉火锅券</span>一份</p>
+								<p>您的圣诞礼物将会搭乘小火箭送到<span class="rewardLoca">会搭乘小火箭送到xxx</span></p>
+							</div>
+							<div class="reward_random  fr" >
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div id="rule">
+					<div class="rule_top clear">
+						<div class="rule_top_no">
+							<p class="rule_top_t"><span>活动未开始</span></p>
+							<div class="leftTime">
+								距离活动开始还有：
+								<!-- <span id="leftTime">03:00:00</span> -->
+								<div id="leftTime" ><span>4</span>天<span>24</span>小时<span>24</span>分<span>24</span>秒</div>
+							</div>
+							
+						</div>
+						<div class="rule_top_yes">
+							<p class="rule_top_t"><span>活动已开始</span></p>
+							<div class="beginGame">赶快进去砸礼物吧：<span id="beginGame"></span></div>
+						</div>
+					</div>
+					<div class="rule_con">
+						<p class="rule_title"></p>
+						<div class="rule_intro">
+							<div class="slide_con">
+								<a class="active" href="javascript:;"><img src="./images/rule1.png" /></a>
+								<a href="javascript:;"><img src="./images/rule2.png" /></a>
+								<a href="javascript:;"><img src="./images/rule3.png" /></a>
+								<a href="javascript:;"><img src="./images/rule4.png" /></a>
+							</div>
+							<div class="slide_but">
+								<a class="active" href="javascript:;">1</a>
+								<a href="javascript:;">2</a>
+								<a href="javascript:;">3</a>
+								<a href="javascript:;">4</a>
+							</div>
+
+						</div>
+						<!-- <p class="rule_intro">
+						在点击“开始游戏”之前，请认真阅读下面游戏规则以及浏览本次活动中提供的礼物。</br>
+						1.	浏览下方礼物并记住心愿礼物的样式、以及该礼物所需要“击中”的次数；</br>
+						2.	点击“开始游戏”，开始1分钟倒计时，当在限定时间内点击相应礼物达到指定次数时，方可获得对应礼物。</br>
+						提示：</br>
+						1.	礼物上方的数字代表距离取得该礼物还需要点击的次数，每点击中礼物一次，礼物会自动下沉，并在下一次出现时其上方的次数会减少1次，当次数为0时，方可取得礼物；</br>
+						2.	在游戏中，可先后点击不同的礼物，其上方次数最快清零的一款礼物为最终所得；</br>
+						3.	当在规定时间内选中的礼物没有库存时，游戏可以继续进行至时间结束；</br>
+						4.	若游戏结束时，仍然没有选中礼物，在当天下午3:30后，系统会自动随机分配礼物，刷新页面或重新登陆可见。</p> -->
+						
+						
+					</div>
+				</div>
+				
+			</div>
+			<div class="game_main_right fr">
+				<div  class="game_time ">
+					<span id="game_time">01:00</span>
+					<a class="logout">退出</a>
+				</div>
+
+				<div class="game_list ">
+					<div class="game_list_top"></div>
+					<ul class="rule_gift_list">
+							<!-- <li class="clear">
+								<p class="gift_title">零食</p>
+								<div>
+									<img class="gift_img" src="../images/gifts/agl.png"/>
+									<p class="gift_name">eeeeeeeee</p>
+									<p class="gift_beat">eeeee</p>
+								</div>
+								<div>
+									<img class="gift_img" src="../images/gifts/agl.png"/>
+									<p class="gift_name">瑞可爷爷蛋糕券</p>
+									<p class="gift_beat">3次</p>
+								</div>
+							</li> -->	
+						</ul>
+					<ul id="game_list" class=" clear">
+						<!-- <li class="game_list_t">
+							<span>名称</span>
+							<span>剩余数量</span>
+							<span>剩余次數</span>
+						</li>
+						<li class="game_list_t">
+							<span>名称</span>
+							<span>剩余数量</span>
+							<span>剩余次數</span>
+						</li> -->
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+</body>
+<script type="text/javascript" src="./configTime.js"></script>
+
+
+<!-- build:js dist/index.js -->
+<script type="text/javascript" src="./js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="./js/create.js"></script>
+<script type="text/javascript" src="./js/index.js"></script>
+<!-- /build -->
+</html>
